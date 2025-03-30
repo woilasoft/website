@@ -4,7 +4,7 @@
 npm create astro@latest -- --template psephopaiktes/astro-i18n-starter
 ```
 
-[![Logo Image](docs/hero.svg)](https://astro-i18n-starter.pages.dev/ "See document")
+[![Logo Image](docs/hero.svg)](https://woilasoft.com/ "See document")
 
 i18n Starter is a simple [Astro](https://astro.build) theme for creating multilingual websites.
 
@@ -35,4 +35,4 @@ This theme is self-documented, and the pages within this theme can be considered
 
 Install and preview locally or check out the sample site below.
 
-https://astro-i18n-starter.pages.dev/
+https://woilasoft.com/
