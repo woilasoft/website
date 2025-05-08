@@ -10,13 +10,15 @@ export const SITE_DESCRIPTION: string | Multilingual = {
 	ja: "i18n 対応の Astro スターターテンプレート。",
 	"zh-cn": "具有 i18n 支持的 Astro 入门模板。",
 	ar: "قالب بداية لـ Astro مع دعم i18n.",
+	fr: "Modèle de départ Astro avec prise en charge de l'i18n.",
 };
 
-export const X_ACCOUNT: string | Multilingual = "@psephopaiktes";
+export const X_ACCOUNT: string | Multilingual = "@woilasoft";
 
 export const NOT_TRANSLATED_CAUTION: string | Multilingual = {
 	en: "This page is not available in your language.",
 	ja: "このページはご利用の言語でご覧いただけません。",
 	"zh-cn": "此页面不支持您的语言。",
 	ar: "هذه الصفحة غير متوفرة بلغتك.",
+	fr: "Cette page n'est pas disponible dans votre langue.",
 };

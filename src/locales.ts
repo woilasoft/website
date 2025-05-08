@@ -28,4 +28,8 @@ export const LOCALES_SETTING: LocaleSetting = {
 		label: "العربية",
 		dir: "rtl",
 	},
+	fr: {
+		label: "Français",
+		lang: "fr-FR",
+	},
 };

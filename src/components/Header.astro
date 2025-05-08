@@ -32,7 +32,15 @@ const isActive = (path: string) =>
           href={getRelativeLocaleUrl(locale, "/setup")}
           class={isActive("/setup") ? "active" : null}
         >
-          {t({ ja: "設定", en: "Setup", "zh-cn": "设置", ar: "إعداد" })}
+          {
+            t({
+              ja: "設定",
+              en: "Setup",
+              "zh-cn": "设置",
+              ar: "إعداد",
+              fr: "Configuration",
+            })
+          }
         </a>
       </li>
 
@@ -47,6 +55,7 @@ const isActive = (path: string) =>
               en: "Add Page",
               "zh-cn": "添加页面",
               ar: "إضافة صفحة",
+              fr: "Ajouter une page",
             })
           }
         </a>
@@ -63,6 +72,7 @@ const isActive = (path: string) =>
               en: "Features",
               "zh-cn": "特性",
               ar: "الميزات",
+              fr: "Fonctionnalités",
             })
           }
         </a>
@@ -82,7 +92,15 @@ const isActive = (path: string) =>
           href={getRelativeLocaleUrl(locale, "/blog")}
           class={isActive("/blog") ? "active" : null}
         >
-          {t({ ja: "ブログ", en: "Blog", "zh-cn": "博客", ar: "مدونة" })}
+          {
+            t({
+              ja: "ブログ",
+              en: "Blog",
+              "zh-cn": "博客",
+              ar: "مدونة",
+              fr: "Blog",
+            })
+          }
         </a>
       </li>
 

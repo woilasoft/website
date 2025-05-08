@@ -6,7 +6,7 @@ const locale = Astro.currentLocale as Lang;
 ---
 
 {
-  locale === "en" ? (
+  locale === "en"||locale === "fr" ? (
     <style>body{ font-family: "Noto Sans", sans-serif; }</style>
   )
 
