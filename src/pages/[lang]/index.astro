@@ -10,222 +10,267 @@ import heroImageJa from "@/assets/ja/hero.svg";
 import heroImageZhCn from "@/assets/zh-cn/hero.svg";
 import { Image } from "astro:assets";
 
+import HeroSection from "@/components/HeroSection.astro";
+// import ServiceSection from "@/components/ServiceSection.astro";
+import FeaturesGeneral from "@/components/FeaturesGeneral.astro";
+import ClientsSection from "@/components/TestimonialCompany.astro";
+//import Activity from "@/components/Activity";
+import Activity from "@/components/Activity.astro";
+import ShowCaseProject from "@/components/showcase-project";
+import features from "@/datas/features.json";
+import featureImage from "@/assets/images/section_img.png";
+import Teams from "@/components/TeamSection.astro";
+import BlogSection from "@/components/blogSection.astro";
+import { localeParams } from "@/i18n";
 const locale = Astro.currentLocale as Lang;
-
+import TeamSection from "@/components/team-section"
 export const getStaticPaths = () =>
   Object.keys(LOCALES).map((lang) => ({
     params: { lang },
   }));
+
 ---
 
 <Layout>
-  <Image
-    src={locale === "ja"
-      ? heroImageJa
-      : locale === "zh-cn"
-        ? heroImageZhCn
-        : locale === "ar"
-          ? heroImageAr
-          : heroImageEn}
-    alt={t({
-      ja: "こんにちは",
-      en: "Hello",
-      "zh-cn": "你好",
-      ar: "مرحبًا",
-      fr: "Bonjour",
-    })}
-    loading="eager"
-  />
+  <HeroSection />
+  <div class="screen-wrapper">
+    <ClientsSection
+      title="Fiabilité aprouvée"
+      subTitle="Découvrez la fiabilité que des entreprises et startups innovantes nous font confiance pour leurs projets numériques."
+    />
+    <FeaturesGeneral
+      title="Solutions adaptées aux exigences numériques"
+      subTitle={`Chez <span class="font-bold text-secondary">Woilasoft</span>, nous relevons les défis uniques rencontrés dans le secteur technologique. Que ce soit pour des <b>logiciels</b> personnalisés, des <b>sites web</b> ou des solutions <b>SaaS</b>, nous sommes dédiés à atteindre vos objectifs.`}
+      src={featureImage}
+      alt="Produits Woilasoft dans des boîtes flottantes"
+      features={features}
+    />
+  </div>
+  <Activity />
+  <div class="screen-wrapper">
+    <ShowCaseProject client:load />
+  </div>
+  <!-- <Teams /> -->
+  <TeamSection client:load/>
+  <div class="screen-wrapper">
+    <BlogSection />
+  </div>
+  <div
+    class="relative bg-gradient-to-r from-purple-600 to-blue-600 py-20 max-sm:py-12 text-white overflow-hidden"
+  >
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1522252234503-e356532cafd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxjb2RlfGVufDB8MHx8fDE2OTQwOTg0MTZ8MA&ixlib=rb-4.0.3&q=80&w=1080"
+        alt="Background Image"
+        class="object-cover object-center w-full h-full"
+      />
+      <div class="absolute inset-0 bg-black opacity-70"></div>
+    </div>
 
-  <p>
-    <em>
-      {
-        t({
-          ja: "i18n Starter は多言語対応サイトを作成するためのシンプルな Astro theme です。Astro v4.0からのi18n機能に対応しています。",
-          en: "i18n Starter is a simple Astro theme for creating multilingual websites. It supports i18n feature from Astro v4.0.",
-          "zh-cn":
-            "i18n Starter 是一个用于创建多语言网站的简单 Astro 主题。它支持 Astro v4.0 的 i18n 功能。",
-          ar: "i18n Starter هو موضوع Astro بسيط لإنشاء مواقع الويب متعددة اللغات.يدعم ميزة i18n من Astro v4.0.",
-          fr: "i18n Starter est un thème Astro simple pour créer des sites web multilingues. Il prend en charge la fonctionnalité i18n de Astro v4.0.",
-        })
-      }
-    </em>
-  </p>
-
-  <p>
-    <a
-      href={`https://docs.astro.build/${locale}/guides/internationalization/`}
-      target="_blank"
+    <div
+      class="relative z-10 flex flex-col justify-center items-center h-full text-center px-4"
     >
-      Internationalization (i18n) Routing | Astro Docs
-      <span class="material-icons-sharp dir">open_in_new</span>
-    </a>
-  </p>
-
-  <p>
-    {
-      t({
-        ja: "基本的にサブディレクトリ方式のURLのみサポートしています。言語ごとに以下のようなURLで管理されます。ルートURLは指定したデフォルト言語にリダイレクトされます。",
-        en: "Basically, only the subdirectory URL scheme is supported. It is managed by the URL as follows for each language. The root URL is redirected to the specified default language.",
-        "zh-cn":
-          "基本上，只支持子目录 URL 方案。 它由以下 URL 为每种语言进行管理。 根 URL 将重定向到指定的默认语言。",
-        ar: "أساساً، يتم دعم نظام URL الفرعي فقط. يتم إدارتها من خلال URL كما يلي لكل لغة. يتم توجيه عنوان URL الجذري إلى اللغة الافتراضية المحددة.",
-        fr: "En gros, seul le schéma d'URL de sous-dossiers est supporté. Il est géré par l'URL comme suit pour chaque langue. L'URL racine est redirigée vers la langue par défaut spécifiée.",
-      })
-    }
-  </p>
-
-  <ul>
-    <li>example.com/en/</li>
-    <li>example.com/ja/</li>
-  </ul>
-
-  <h2>
-    {
-      t({
-        ja: "特徴",
-        en: "Feature",
-        "zh-cn": "特点",
-        ar: "ميزة",
-        fr: "Fonctionnalités",
-      })
-    }
-  </h2>
-
-  <ul>
-    <li>
-      {
-        t({
-          ja: "Astro公式のi18n機能をサポート",
-          en: "support for Astro's official i18n feature",
-          "zh-cn": "支持 Astro 官方的 i18n 功能",
-          ar: "دعم لميزة i18n الرسمية لـ Astro",
-          fr: "Support pour la fonctionnalité i18n officielle d'Astro",
-        })
-      }
-    </li>
-    <li>
-      {
-        t({
-          ja: "多言語ページの様々な管理方法",
-          en: "Various management methods for multilingual pages",
-          "zh-cn": "多语言页面的各种管理方法",
-          ar: "طرق إدارة متعددة للصفحات متعددة اللغات",
-          fr: "Différentes méthodes de gestion des pages multilingues",
-        })
-      }
-    </li>
-    <li>Vanilla CSS</li>
-    <li>
-      {
-        t({
-          ja: "SEOフレンドリー",
-          en: "SEO friendly",
-          "zh-cn": "SEO 友好",
-          ar: "SEO ودية",
-          fr: "SEO compatible",
-        })
-      }
-    </li>
-    <li>
-      {
-        t({
-          en: "100/100 Lighthouse performance",
-          ja: "100/100 Lighthouse スコア",
-          "zh-cn": "100/100 Lighthouse 性能",
-          ar: "أداء Lighthouse 100/100",
-          fr: "Performance 100/100 Lighthouse",
-        })
-      }
-    </li>
-  </ul>
-
-  <h2>
-    {
-      t({
-        en: "Getting Started",
-        ja: "はじめに",
-        "zh-cn": "入门指南",
-        ar: "البدء",
-        fr: "Commencer",
-      })
-    }
-  </h2>
-
-  <p>
-    {
-      t({
-        ja: "Astroの基本的な知識を前提とします。",
-        en: "Assumes basic knowledge of Astro.",
-        "zh-cn": "假设您具有 Astro 的基本知识。",
-        ar: "يفترض المعرفة الأساسية بـ Astro.",
-        fr: "Assumes basic knowledge of Astro.",
-      })
-    }
-  </p>
-
-  <p>
-    <a href="https://docs.astro.build/" target="_blank">
-      https://docs.astro.build/
-      <span class="material-icons-sharp dir">open_in_new</span>
-    </a>
-  </p>
-
-  <p>
-    {
-      t({
-        ja: "大丈夫な方は、さっそく初めましょう！",
-        en: "If you're okay, let's get started!",
-        "zh-cn": "如果您没问题，让我们开始吧！",
-        ar: "إذا كنت على ما يرام، دعنا نبدأ!",
-        fr: "Si vous êtes ok, commençons!",
-      })
-    }
-  </p>
-
-  <p>
-    <a href={getRelativeLocaleUrl(locale, "setup")} class="start">
-      <span class="material-icons-sharp dir">arrow_forward</span>
-      {
-        t({
-          ja: "設定を開始",
-          en: "Start Setup",
-          "zh-cn": "开始设置",
-          ar: "ابدأ الإعداد",
-          fr: "Commencer la configuration",
-        })
-      }
-    </a>
-  </p>
+      <h1 class="text-5xl font-bold leading-tight mb-4">Prêt à innover ?</h1>
+      <p class="text-lg text-gray-300 mb-8">
+        Nous sommes prêts à vous aider à atteindre vos objectifs et à renforcer
+        votre identité numérique sans crainte.
+      </p>
+      <button class="shiny-cta">
+        <span>Contactez nous !</span>
+      </button>
+    </div>
+  </div>
 </Layout>
 
 <style>
-  ul {
-    margin-block-start: var(--sp-s);
-    list-style: disc;
-    padding-inline-start: 1em;
+  :root {
+    --shiny-cta-bg: #000000;
+    --shiny-cta-bg-subtle: #1a1818;
+    --shiny-cta-fg: #ffffff;
+    --shiny-cta-highlight: blue;
+    --shiny-cta-highlight-subtle: #8484ff;
   }
 
-  h2 {
-    color: var(--color-theme);
-    margin-block-start: var(--sp-l);
+  @property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
   }
 
-  em {
-    display: block;
-    font-style: normal;
-    font-size: 1.3em;
-    margin-block-end: var(--sp-m);
+  @property --gradient-angle-offset {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
   }
 
-  .start {
-    display: block;
-    width: fit-content;
-    padding: 0.5em;
-    border-radius: 0.5em;
-    background: var(--color-main);
-    color: var(--color-base);
-    text-decoration: none;
-    letter-spacing: 0.05em;
+  @property --gradient-percent {
+    syntax: "<percentage>";
+    initial-value: 5%;
+    inherits: false;
+  }
+
+  @property --gradient-shine {
+    syntax: "<color>";
+    initial-value: white;
+    inherits: false;
+  }
+
+  .shiny-cta {
+    --animation: gradient-angle linear infinite;
+    --duration: 3s;
+    --shadow-size: 2px;
+    isolation: isolate;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    outline-offset: 4px;
+    padding: 1.25rem 2.5rem;
+    font-family: inherit;
+    font-size: 1.125rem;
+    line-height: 1.2;
+    border: 1px solid transparent;
+    border-radius: 360px;
+    color: var(--shiny-cta-fg);
+    background:
+      linear-gradient(var(--shiny-cta-bg), var(--shiny-cta-bg)) padding-box,
+      conic-gradient(
+          from calc(var(--gradient-angle) - var(--gradient-angle-offset)),
+          transparent,
+          var(--shiny-cta-highlight) var(--gradient-percent),
+          var(--gradient-shine) calc(var(--gradient-percent) * 2),
+          var(--shiny-cta-highlight) calc(var(--gradient-percent) * 3),
+          transparent calc(var(--gradient-percent) * 4)
+        )
+        border-box;
+    box-shadow: inset 0 0 0 1px var(--shiny-cta-bg-subtle);
+
+    &::before,
+    &::after,
+    span::before {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      inset-inline-start: 50%;
+      inset-block-start: 50%;
+      translate: -50% -50%;
+      z-index: -1;
+    }
+
+    &:active {
+      translate: 0 1px;
+    }
+  }
+
+  /* Dots pattern */
+  .shiny-cta::before {
+    --size: calc(100% - var(--shadow-size) * 3);
+    --position: 2px;
+    --space: calc(var(--position) * 2);
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(
+        circle at var(--position) var(--position),
+        white calc(var(--position) / 4),
+        transparent 0
+      )
+      padding-box;
+    background-size: var(--space) var(--space);
+    background-repeat: space;
+    mask-image: conic-gradient(
+      from calc(var(--gradient-angle) + 45deg),
+      black,
+      transparent 10% 90%,
+      black
+    );
+    border-radius: inherit;
+    opacity: 0.4;
+    z-index: -1;
+  }
+
+  /* Inner shimmer */
+  .shiny-cta::after {
+    --animation: shimmer linear infinite;
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(
+      -50deg,
+      transparent,
+      var(--shiny-cta-highlight),
+      transparent
+    );
+    mask-image: radial-gradient(circle at bottom, transparent 40%, black);
+    opacity: 0.6;
+  }
+
+  .shiny-cta span {
+    z-index: 1;
+
+    &::before {
+      --size: calc(100% + 1rem);
+      width: var(--size);
+      height: var(--size);
+      box-shadow: inset 0 -1ex 2rem 4px var(--shiny-cta-highlight);
+      opacity: 0;
+    }
+  }
+
+  /* Animate */
+  .shiny-cta {
+    --transition: 800ms cubic-bezier(0.25, 1, 0.5, 1);
+    transition: var(--transition);
+    transition-property: --gradient-angle-offset, --gradient-percent,
+      --gradient-shine;
+
+    &,
+    &::before,
+    &::after {
+      animation:
+        var(--animation) var(--duration),
+        var(--animation) calc(var(--duration) / 0.4) reverse paused;
+      animation-composition: add;
+    }
+
+    span::before {
+      transition: opacity var(--transition);
+      animation: calc(var(--duration) * 1.5) breathe linear infinite;
+    }
+  }
+
+  .shiny-cta:is(:hover, :focus-visible) {
+    --gradient-percent: 20%;
+    --gradient-angle-offset: 95deg;
+    --gradient-shine: var(--shiny-cta-highlight-subtle);
+
+    &,
+    &::before,
+    &::after {
+      animation-play-state: running;
+    }
+
+    span::before {
+      opacity: 1;
+    }
+  }
+
+  @keyframes gradient-angle {
+    to {
+      --gradient-angle: 360deg;
+    }
+  }
+
+  @keyframes shimmer {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  @keyframes breathe {
+    from,
+    to {
+      scale: 1;
+    }
+    50% {
+      scale: 1.2;
+    }
   }
 </style>

@@ -25,6 +25,9 @@ const {
 const locale = Astro.currentLocale as Lang;
 const localeTitle = title ? `${title} - ${t(SITE_TITLE)}` : t(SITE_TITLE);
 const localeDescription = description || t(SITE_DESCRIPTION);
+
+import { join } from "node:path";
+import { AstroFont } from "astro-font";
 ---
 
 <!--
@@ -50,6 +53,60 @@ const localeDescription = description || t(SITE_DESCRIPTION);
         />
       ))
     }
+    <AstroFont
+    config={[
+      {
+        name: "Raleway",
+        src: [
+          {
+            style: 'normal',
+            weight: '100',
+            path: join(process.cwd(), 'public', 'fonts', 'Raleway-Thin.ttf')
+          },
+          {
+            style: 'normal',
+            weight: '200',
+            path: join(process.cwd(), 'public', 'fonts', 'Raleway-ExtraLight.ttf')
+          },
+          {
+            style: 'normal',
+            weight: '300',
+            path: join(process.cwd(), 'public', 'fonts', 'Raleway-Light.ttf')
+          },
+          {
+            style: 'normal',
+            weight: '400',
+            path: join(process.cwd(), 'public', 'fonts', 'Raleway-Regular.ttf')
+          },
+          {
+            style: 'normal',
+            weight: '500',
+            path: join(process.cwd(), 'public', 'fonts', 'Raleway-Medium.ttf')
+          },
+          {
+            style: 'normal',
+            weight: '600',
+            path: join(process.cwd(), 'public', 'fonts', 'Raleway-SemiBold.ttf')
+          },
+          {
+            style: 'normal',
+            weight: '700',
+            path: join(process.cwd(), 'public', 'fonts', 'Raleway-Bold.ttf')
+          },
+          {
+            style: 'normal',
+            weight: '800',
+            path: join(process.cwd(), 'public', 'fonts', 'Raleway-ExtraBold.ttf')
+          },
+
+        ],
+        preload: false,
+        display: "swap",
+        selector: "body",
+        fallback: "sans-serif",
+      }
+    ]}
+  />
 
     <!-- icon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -70,23 +127,32 @@ const localeDescription = description || t(SITE_DESCRIPTION);
     <meta name="twitter:site" content={t(X_ACCOUNT)} />
 
     <!-- External Resource -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link rel="preload" as="style" fetchpriority="high" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;800&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;800&display=swap" media="print" onload={`this.media='all'`} />
 
     <link rel="preload" as="style" fetchpriority="high" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp&display=swap" media="print" onload={`this.media='all'`} />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp&display=swap" media="print" onload={`this.media='all'`} /> -->
 
     <LocaleHtmlHead />
   </head>
 
   <body>
+    <div
+      class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+      aria-hidden="true"
+    >
+      <div
+        class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-ssecondary to-ssecondary opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+        style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+      >
+      </div>
+    </div>
     <LocaleSuggest />
     <Header />
-
-    <main class="l-main l-content">
+    <main class="min-h-[100vh]">
       <slot />
     </main>
 

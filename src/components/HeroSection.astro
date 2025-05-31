@@ -1,0 +1,175 @@
+---
+// import GridPattern from "./ui/grid-pattern";
+import { cn } from "@/lib/utils";
+import { ChevronRight } from "lucide-react";
+import AnimatedGradientText from "./ui/animated-gradient-text";
+import ShimmerButton from "./ui/shimmer-button";
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+---
+
+<div
+  class="relative screen-wrapper flex h-[80vh] max-sm:h-[70vh] w-full flex-col items-center justify-center bg-background"
+>
+  <!-- <GridPattern
+    squares={[
+      [4, 4],
+      [5, 1],
+      [8, 2],
+      [5, 3],
+      [5, 5],
+      [10, 10],
+      [12, 15],
+      [15, 10],
+      [10, 15],
+      [15, 10],
+      [10, 15],
+      [15, 10],
+    ]}
+    className={cn(
+      "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
+      "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12 z-[-1]"
+    )}
+  /> -->
+  <AnimatedGridPattern
+        client:load
+        numSquares={30}
+        maxOpacity={0.1}
+        duration={3}
+        repeatDelay={1}
+        className={cn(
+          "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
+          "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
+        )}
+      />
+  <div class="py-5">
+    <AnimatedGradientText>
+      🎉 <hr class="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
+      <span
+        class={cn(
+          `inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
+        )}
+      >
+        Introduction Woilasoft
+      </span>
+      <ChevronRight
+        className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5"
+      />
+    </AnimatedGradientText>
+  </div>
+
+  <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-6xl">
+    Innovons ensemble !
+  </h1>
+  <p
+    class="mt-6 max-sm:text-normalsize max-sm:w-full max-w-screen-lg lg:text-xl text-gray-600 text-center"
+  >
+    <span class="font-bold">Woilasoft</span>, votre parténaire pour des
+    solutions numériques et personnalisées. Nous créons les solutions numériques
+    de <span class="line-through">demain</span>, dès <strong class="font-bold"
+      >aujourd'hui</strong
+    >!. <span class="max-sm:hidden"
+      >Que vous soyez une start-up ou une entreprise établie, nous sommes là
+      pour vous aider à transformer votre présence numérique.</span
+    >
+  </p>
+  <div class="flex items-center gap-4">
+    <a
+      href="#_"
+      class="relative inline-flex items-center px-12 py-3 max-sm:px-5 overflow-hidden font-medium text-secondary border-2 border-secondary rounded-full hover:text-white group hover:bg-gray-50"
+    >
+      <span
+        class="absolute left-0 block w-full h-full transition-all bg-transparent opacity-100 group-hover:bg-secondary top-0 duration-400 ease"
+      ></span>
+      <span
+        class="absolute right-0 flex items-center max-sm:hidden justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </span>
+      <span class="relative text-lg max-sm:text-[1em] whitespace-nowrap"
+        >Voir nos projets</span
+      >
+    </a>
+    <ShimmerButton className="my-5" background={"#0d1961"}>
+      <span class="text-lg max-sm:text-base!">Nous contactez</span>
+    </ShimmerButton>
+  </div>
+</div>
+<style>
+  .circle-sketch-highlight {
+    position: relative;
+  }
+
+  .circle-sketch-highlight:before {
+    content: "";
+    z-index: -1;
+    left: -0.5em;
+    top: -0.1em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: red;
+    position: absolute;
+    border-right-color: transparent;
+    width: 100%;
+    height: 1em;
+    transform: rotate(2deg);
+    opacity: 0.7;
+    border-radius: 50%;
+    padding: 0.1em 0.25em;
+  }
+
+  .circle-sketch-highlight:after {
+    content: "";
+    z-index: -1;
+    left: -0.5em;
+    top: 0.1em;
+    padding: 0.1em 0.25em;
+    border-width: 2px;
+    border-style: solid;
+    border-color: red;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    position: absolute;
+    width: 100%;
+    height: 1em;
+    transform: rotate(-1deg);
+    opacity: 0.7;
+    border-radius: 50%;
+  }
+  strong {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -0.125rem;
+      left: -0.5rem;
+      right: -0.5rem;
+      height: 0.75rem;
+      z-index: -1;
+      background-image: url("/underline.svg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
+  p > strong {
+    &::after {
+      bottom: -0.2rem;
+      height: 0.5rem;
+      left: -0.25rem;
+      right: -0.25rem;
+    }
+  }
+</style>

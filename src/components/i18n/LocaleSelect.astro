@@ -1,10 +1,42 @@
 ---
 // Select UI to switch between locales.
-
+import  LanguageSwitcher from "@/components/LanguageSwitcher" 
 import { getLocalePaths, LOCALES } from "@/i18n";
+import { cn } from "@/lib/utils";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { FlagIcon } from "@/components/flag-icon"
 ---
+<!-- <DropdownMenu client:load>
+  <DropdownMenuTrigger asChild client:load>
+    <Button variant="ghost" className="flex items-center gap-2 rounded-full">
+      <FlagIcon country={Astro.currentLocale as string} className="mr-1" />
+      <span class="hidden sm:inline-block">{LOCALES[Astro.currentLocale as string].label}</span>
+      <ChevronDown className="h-4 w-4" />
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent align="end" client:load>
+    {getLocalePaths(Astro.url).map(({ path, lang }) => (
+      <DropdownMenuItem
+        key={lang}
+        onSelect={() => {
+          localStorage.selectedLang = lang;
+          window.location.href = path;
+        }}
+        className={cn(
+          "flex items-center gap-2 cursor-pointer",
+          Astro.currentLocale === lang && "font-medium bg-accent",
+        )}
+      >
+        <FlagIcon country={lang} className="mr-2" />
+        <span>{LOCALES[lang].label}</span>
+      </DropdownMenuItem>
+    ))}
+  </DropdownMenuContent>
+</DropdownMenu> -->
 
-<label>
+<!-- <label>
   <span class="material-icons-sharp">translate</span>
   <select data-languageSelect>
     {
@@ -20,7 +52,35 @@ import { getLocalePaths, LOCALES } from "@/i18n";
     }
   </select>
   <span class="material-icons-sharp">expand_more</span>
-</label>
+</label> -->
+<!-- <label class="relative block w-48 text-sm font-medium text-foreground">
+  <span class="absolute inset-y-0 left-2 flex items-center pointer-events-none sm:hidden">
+    <FlagIcon country={Astro.currentLocale as string} className="w-5 h-5" />
+  </span>
+
+  <select
+    data-languageSelect
+    class="w-full appearance-none rounded-full border border-input bg-background px-10 py-2 pl-10 pr-8 shadow-sm text-foreground cursor-pointer text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+  >
+    {getLocalePaths(Astro.url).map(({ path, lang }) => (
+      <option
+        
+        value={path}
+        data-lang={lang}
+        selected={lang === Astro.currentLocale}
+        dir={LOCALES[lang].dir || undefined}
+      >
+        {LOCALES[lang].label}
+      </option>
+    ))}
+  </select>
+
+  {/* Dropdown Icon */}
+  <span class="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+    <ChevronDown className="w-4 h-4 text-muted-foreground" />
+  </span>
+</label> -->
+<LanguageSwitcher currentLocale={Astro.currentLocale!} currentUrl={Astro.url!} />
 
 <script is:inline>
   const selects = document.querySelectorAll("[data-languageSelect]");

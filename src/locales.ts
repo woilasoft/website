@@ -17,17 +17,17 @@ export const LOCALES_SETTING: LocaleSetting = {
 		label: "English",
 		lang: "en-US",
 	},
-	ja: {
-		label: "日本語",
-	},
-	"zh-cn": {
-		label: "简体中文",
-		lang: "zh-CN",
-	},
-	ar: {
-		label: "العربية",
-		dir: "rtl",
-	},
+	// ja: {
+	// 	label: "日本語",
+	// },
+	// "zh-cn": {
+	// 	label: "简体中文",
+	// 	lang: "zh-CN",
+	// },
+	// ar: {
+	// 	label: "العربية",
+	// 	dir: "rtl",
+	// },
 	fr: {
 		label: "Français",
 		lang: "fr-FR",

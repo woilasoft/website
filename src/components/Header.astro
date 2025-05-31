@@ -1,203 +1,193 @@
 ---
-// Header & Navigation UI displayed on each page.
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from "../consts";
+import LangLink from "./LangLink.astro";
+import clsx from "clsx";
+import Logo from "@/assets/icons/logo.svg?raw";
+import LogoT from "@/assets/Logo.astro";
+import ShimmerButton from "@/components/ui/shimmer-button";
+import  LanguageSwitcher from "@/components/LanguageSwitcher" 
+import { ChevronDown, Menu, Search, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { cn } from "@/lib/utils"
+import { FlagIcon } from "@/components/flag-icon"
+import { ThemeSwitcher } from "@/components/theme-switcher-cc"
 
-import LocaleSelect from "@/components/i18n/LocaleSelect.astro";
-import { Image } from "astro:assets";
-import { useTranslations, type Lang } from "@/i18n";
-import { getRelativeLocaleUrl } from "astro:i18n";
-const t = useTranslations(Astro.currentLocale as Lang);
+type Language = {
+  code: string
+  name: string
+}
 
-import AstroImage from "@/assets/astro-logo.svg";
+const languages: Language[] = [
+  {
+    code: "en",
+    name: "English",
+  },
+  {
+    code: "fr",
+    name: "Français",
+  },
+]
 
-const locale = Astro.currentLocale as Lang;
+const { lang } = Astro.params;
 
-const isActive = (path: string) =>
-  getRelativeLocaleUrl(locale, path) === Astro.url.pathname;
+const basePath = lang ? `/${lang}` : "";
+const homeSlug = `${basePath}`;
+const blogSlug = `${basePath}/blog`;
+const aboutSlug = `${basePath}/about`;
+const serviceSlug = `${basePath}/service`;
+const projectSlug = `${basePath}/projects`;
+const contactSlug = `${basePath}/contact`;
+
 ---
 
-<header class="l-header">
-  <h1 dir="ltr">
-    <a href={getRelativeLocaleUrl(locale, "/")}>
-      <Image src={AstroImage} alt="Astro" />
-      i18n Starter
-    </a>
-  </h1>
-
-  <LocaleSelect />
-
-  <nav class="l-content">
-    <ul>
-      <li>
-        <a
-          href={getRelativeLocaleUrl(locale, "/setup")}
-          class={isActive("/setup") ? "active" : null}
+<header
+  class={clsx(
+    "sticky inset-x-0 top-3 z-50 max-w-screen-md mx-auto rounded-full max-lg:w-[90%] max-lg:px-2",
+    {
+      "border border-gray-200 bg-white/65 backdrop-blur": "scroll",
+    }
+  )}
+  id="header"
+>
+  <nav
+    class="flex items-center justify-between py-3 lg:py-2 w-full px-3 lg:px-2 max-sm:pl-1 max-sm:pr-3"
+    aria-label="Global"
+  >
+    <div id="logo">
+      <HeaderLink href="#" class="p-1.5 pl-3">
+        <span class="sr-only">{SITE_TITLE}</span>
+        <LogoT width={35} />
+      </HeaderLink>
+    </div>
+    <div class="flex lg:hidden">
+      <button
+        type="button"
+        id="menu"
+        class="-m-2.5 inline-flex items-center justify-center rounded-full bg-gray-100 p-2.5 text-gray-700"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
         >
-          {
-            t({
-              ja: "設定",
-              en: "Setup",
-              "zh-cn": "设置",
-              ar: "إعداد",
-              fr: "Configuration",
-            })
-          }
-        </a>
-      </li>
-
-      <li>
-        <a
-          href={getRelativeLocaleUrl(locale, "/page")}
-          class={isActive("/page") ? "active" : null}
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="hidden lg:flex lg:gap-x-4">
+      <HeaderLink href={homeSlug}>Accueil</HeaderLink>
+      <HeaderLink href={projectSlug}>Projets</HeaderLink>
+      <HeaderLink href={serviceSlug}>Services</HeaderLink>
+      <HeaderLink href={blogSlug}>Blog</HeaderLink>
+      <HeaderLink href={aboutSlug}>À propos</HeaderLink>
+    </div>
+    <div class="max-lg:hidden flex gap-x-2 items-center">
+      <!-- <ThemeSwitcher client:load /> -->
+      <LanguageSwitcher currentLocale={Astro.currentLocale!} currentUrl={Astro.url!} client:load />
+      <HeaderLink href={contactSlug}>
+        <ShimmerButton className="px-3.5 py-2.5 text-sm" background={"#0d1961"}
+          >Nous Contactez</ShimmerButton
         >
-          {
-            t({
-              ja: "ページの追加",
-              en: "Add Page",
-              "zh-cn": "添加页面",
-              ar: "إضافة صفحة",
-              fr: "Ajouter une page",
-            })
-          }
-        </a>
-      </li>
-
-      <li>
-        <a
-          href={getRelativeLocaleUrl(locale, "/feature")}
-          class={isActive("/feature") ? "active" : null}
-        >
-          {
-            t({
-              ja: "その他の機能",
-              en: "Features",
-              "zh-cn": "特性",
-              ar: "الميزات",
-              fr: "Fonctionnalités",
-            })
-          }
-        </a>
-      </li>
-
-      <li class="en-only">
-        <a
-          href={getRelativeLocaleUrl(locale, "/monolingual")}
-          class={isActive("/monolingual") ? "active" : null}
-        >
-          Monolingual
-        </a>
-      </li>
-
-      <li>
-        <a
-          href={getRelativeLocaleUrl(locale, "/blog")}
-          class={isActive("/blog") ? "active" : null}
-        >
-          {
-            t({
-              ja: "ブログ",
-              en: "Blog",
-              "zh-cn": "博客",
-              ar: "مدونة",
-              fr: "Blog",
-            })
-          }
-        </a>
-      </li>
-
-      <li>
-        <a
-          href="https://github.com/psephopaiktes/astro-i18n-starter"
-          target="_blank"
-        >
-          GitHub
-          <span class="material-icons-sharp dir">open_in_new</span>
-        </a>
-      </li>
-    </ul>
+      </HeaderLink>
+    </div>
   </nav>
+  <!-- Mobile menu, show/hide based on menu open state. -->
 </header>
-
+<div id="mobile-menu" class="lg:hidden" role="dialog" aria-modal="true">
+  <!-- Background backdrop, show/hide based on slide-over state. -->
+  <div id="close" class="fixed inset-0 z-50"></div>
+  <div
+    id="mobile-nav"
+    class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-4 py-4 sm:max-w-sm"
+  >
+    <div class="flex items-center justify-between">
+      <HeaderLink href={homeSlug} class="-m-1.5">
+        <span class="sr-only">{SITE_TITLE}</span>
+        <Fragment set:html={Logo} />
+      </HeaderLink>
+      <div>
+        <LanguageSwitcher currentLocale={Astro.currentLocale!} currentUrl={Astro.url!} client:load />
+      <button
+        type="button"
+        id="close"
+        class="-m-2.5 rounded-md p-2.5 text-gray-700 sm:hidden"
+      >
+        <span class="sr-only">Close menu</span>
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      </div>
+      
+    </div>
+    <div class="space-y-4 py-6 flex flex-col">
+      <HeaderLink href={homeSlug}>Accueil</HeaderLink>
+      <HeaderLink href={projectSlug}>Projets</HeaderLink>
+      <HeaderLink href={serviceSlug}>Services</HeaderLink>
+      <HeaderLink href={blogSlug}>Blog</HeaderLink>
+      <HeaderLink href={aboutSlug}>À propos</HeaderLink>
+      <HeaderLink href={contactSlug}
+        ><button
+          class="rounded-full bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >Contact Us</button
+        ></HeaderLink
+      >
+    </div>
+  </div> 
+</div>
 <style>
-  * {
-    flex-wrap: wrap;
-    justify-content: center;
+  #logo{
+    width:45px;
   }
-
-  header {
-    display: grid;
-    place-items: center;
-    gap: var(--sp-s);
+  #mobile-menu {
+    transition: all 0.4s ease-in-out;
   }
-
-  h1 {
-    margin-block-start: var(--sp-l);
-    margin-inline-start: -0.5em;
-    font-size: 40px;
-    font-family: var(--english-font);
-    font-weight: 900;
-    @media (width < 480px) {
-      font-size: 28px;
-    }
-
-    a {
-      display: flex;
-      align-items: center;
-    }
-    img {
-      width: 6em;
-      position: relative;
-      inset: 0.1em;
-    }
+  div#close {
+    transition: inherit;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
   }
-
-  nav {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-m);
+  #mobile-nav {
+    transition: inherit;
+    right: -100%;
   }
-  ul {
-    display: flex;
-    gap: var(--sp-s);
-    margin-block-start: var(--sp-s);
-
-    .en-only {
-      position: relative;
-      &:not(:lang(en))::before {
-        content: "EN";
-        position: absolute;
-        inset: -0.4em -0.6em auto auto;
-        font-size: 0.8em;
-        font-weight: 900;
-        color: var(--color-main);
-        opacity: 0.6;
-      }
-    }
-
-    a {
-      font-size: 1.05rem;
-      display: block;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      padding-block: 0.2em;
-      padding-inline: 0.4em;
-      border-radius: 4px;
-      &:hover,
-      &:active {
-        background-color: color-mix(
-          in srgb,
-          var(--color-theme) 5%,
-          transparent
-        );
-      }
-      &.active {
-        pointer-events: none;
-        color: var(--color-theme);
-      }
-      .material-icons-sharp {
-        opacity: 0.6;
-        margin-inline-start: -0.2em;
-        font-size: 0.9em;
-      }
-    }
+  #mobile-menu.open-menu #mobile-nav {
+    right: 0;
   }
+  #mobile-menu.open-menu div#close {
+    pointer-events: all;
+    opacity: 0.6;
+    /* backdrop-filter: blur(4px); */
+  }
+  /*
+    #23262F
+    #header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(110deg, blue, 45%, #f7f7f7, 55%, blue);
+    }*/
 </style>
