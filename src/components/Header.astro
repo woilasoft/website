@@ -13,6 +13,15 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { cn } from "@/lib/utils"
 import { FlagIcon } from "@/components/flag-icon"
 import { ThemeSwitcher } from "@/components/theme-switcher-cc"
+import { useTranslations, type Lang } from "@/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+const t = useTranslations(Astro.currentLocale as Lang);
+
+const locale = Astro.currentLocale as Lang;
+
+const isActive = (path: string) =>
+  getRelativeLocaleUrl(locale, path) === Astro.url.pathname;
+
 
 type Language = {
   code: string
@@ -44,7 +53,7 @@ const contactSlug = `${basePath}/contact`;
 
 <header
   class={clsx(
-    "sticky inset-x-0 top-3 z-50 max-w-screen-md mx-auto rounded-full max-lg:w-[90%] max-lg:px-2",
+    "sticky inset-x-0 top-3 z-50 max-w-[1000px] mx-auto rounded-full max-lg:w-[90%] max-lg:px-2",
     {
       "border border-gray-200 bg-white/65 backdrop-blur": "scroll",
     }
@@ -56,12 +65,16 @@ const contactSlug = `${basePath}/contact`;
     aria-label="Global"
   >
     <div id="logo">
-      <HeaderLink href="#" class="p-1.5 pl-3">
-        <span class="sr-only">{SITE_TITLE}</span>
-        <LogoT width={35} />
-      </HeaderLink>
+      <a
+          href={getRelativeLocaleUrl(locale, "/")}
+          class={"p-1.5 pl-3 "+isActive("/") ? "text-secondary" : "text-primary" }
+        >
+          <span class="sr-only">{SITE_TITLE}</span>
+           <LogoT width={35} />
+        </a>
     </div>
-    <div class="flex lg:hidden">
+    <div class="flex lg:hidden items-center gap-4 ">
+      <LanguageSwitcher currentLocale={Astro.currentLocale!} currentUrl={Astro.url!} client:load />
       <button
         type="button"
         id="menu"
@@ -83,21 +96,82 @@ const contactSlug = `${basePath}/contact`;
         </svg>
       </button>
     </div>
-    <div class="hidden lg:flex lg:gap-x-4">
-      <HeaderLink href={homeSlug}>Accueil</HeaderLink>
-      <HeaderLink href={projectSlug}>Projets</HeaderLink>
-      <HeaderLink href={serviceSlug}>Services</HeaderLink>
-      <HeaderLink href={blogSlug}>Blog</HeaderLink>
-      <HeaderLink href={aboutSlug}>À propos</HeaderLink>
+    <div class="hidden lg:flex lg:gap-x-4 ml-24">
+       <a
+          href={getRelativeLocaleUrl(locale, "/")}
+          class={isActive("/") ? "text-secondary" : "text-primary"}
+        >
+          {
+            t({
+              en: "Home",
+              fr: "Accueil",
+            })
+          }
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, "/projects")}
+          class={isActive("/projects") ? "text-secondary" : "text-primary"}
+        >
+          {
+            t({
+              en: "Projects",
+              fr: "Projets",
+            })
+          }
+        </a>
+       <a
+          href={getRelativeLocaleUrl(locale, "/services")}
+          class={isActive("/services") ? "text-secondary" : "text-primary"}
+        >
+          {
+            t({
+              en: "Services",
+              fr: "Services",
+            })
+          }
+        </a>
+      <a
+          href={getRelativeLocaleUrl(locale, "/blogs")}
+          class={isActive("/blogs") ? "text-secondary" : "text-primary"}
+        >
+          {
+            t({
+              en: "Blogs",
+              fr: "Blogs",
+            })
+          }
+        </a>
+      <a
+          href={getRelativeLocaleUrl(locale, "/about")}
+          class={isActive("/about") ? "text-secondary" : "text-primary"}
+        >
+          {
+            t({
+              en: "About",
+              fr: "À propos",
+            })
+          }
+        </a>
+      
     </div>
     <div class="max-lg:hidden flex gap-x-2 items-center">
       <!-- <ThemeSwitcher client:load /> -->
+     
       <LanguageSwitcher currentLocale={Astro.currentLocale!} currentUrl={Astro.url!} client:load />
-      <HeaderLink href={contactSlug}>
-        <ShimmerButton className="px-3.5 py-2.5 text-sm" background={"#0d1961"}
-          >Nous Contactez</ShimmerButton
+        <a
+          href={getRelativeLocaleUrl(locale, "/contact")}
+          class={isActive("/contact") ? "text-secondary" : "text-primary"}
         >
-      </HeaderLink>
+          
+          <ShimmerButton className="px-3.5 py-2.5 text-sm" background={"#0d1961"}
+          >{
+            t({
+              en: "Contact us",
+              fr: "Nous contactez",
+            })
+          }</ShimmerButton
+        >
+        </a>
     </div>
   </nav>
   <!-- Mobile menu, show/hide based on menu open state. -->
@@ -107,15 +181,16 @@ const contactSlug = `${basePath}/contact`;
   <div id="close" class="fixed inset-0 z-50"></div>
   <div
     id="mobile-nav"
-    class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-4 py-4 sm:max-w-sm"
+    class="fixed inset-y-0 right-0 z-50 w-[80%] overflow-y-auto bg-white px-4 py-4 sm:max-w-sm"
   >
     <div class="flex items-center justify-between">
-      <HeaderLink href={homeSlug} class="-m-1.5">
-        <span class="sr-only">{SITE_TITLE}</span>
+      <a
+          href={getRelativeLocaleUrl(locale, "/")}
+          class={"-m-1.5 "+isActive("/") ? "text-secondary" : "text-primary"}
+        >
+          <span class="sr-only">{SITE_TITLE}</span>
         <Fragment set:html={Logo} />
-      </HeaderLink>
-      <div>
-        <LanguageSwitcher currentLocale={Astro.currentLocale!} currentUrl={Astro.url!} client:load />
+        </a>
       <button
         type="button"
         id="close"
@@ -136,21 +211,77 @@ const contactSlug = `${basePath}/contact`;
             d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
-      </div>
       
     </div>
     <div class="space-y-4 py-6 flex flex-col">
-      <HeaderLink href={homeSlug}>Accueil</HeaderLink>
-      <HeaderLink href={projectSlug}>Projets</HeaderLink>
-      <HeaderLink href={serviceSlug}>Services</HeaderLink>
-      <HeaderLink href={blogSlug}>Blog</HeaderLink>
-      <HeaderLink href={aboutSlug}>À propos</HeaderLink>
-      <HeaderLink href={contactSlug}
-        ><button
-          class="rounded-full bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >Contact Us</button
-        ></HeaderLink
-      >
+      <a
+          href={getRelativeLocaleUrl(locale, "/")}
+          class={isActive("/") ? "text-secondary" : "text-primary"}
+        >
+          {
+            t({
+              en: "Home",
+              fr: "Accueil",
+            })
+          }
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, "/projects")}
+          class={isActive("/projects") ? "text-secondary" : "text-primary"}
+        >
+          {
+            t({
+              en: "Projects",
+              fr: "Projets",
+            })
+          }
+        </a>
+       <a
+          href={getRelativeLocaleUrl(locale, "/services")}
+          class={isActive("/services") ? "text-secondary" : "text-primary"}
+        >
+          {
+            t({
+              en: "Services",
+              fr: "Services",
+            })
+          }
+        </a>
+      <a
+          href={getRelativeLocaleUrl(locale, "/blogs")}
+          class={isActive("/blogs") ? "text-secondary" : "text-primary"}
+        >
+          {
+            t({
+              en: "Blogs",
+              fr: "Blogs",
+            })
+          }
+        </a>
+      <a
+          href={getRelativeLocaleUrl(locale, "/about")}
+          class={isActive("/about") ? "text-secondary" : "text-primary"}
+        >
+          {
+            t({
+              en: "About",
+              fr: "À propos",
+            })
+          }
+        </a>
+      <a
+          href={getRelativeLocaleUrl(locale, "/contact")}
+          class={isActive("/contact") ? "text-secondary" : "text-primary"}
+        >
+          <button
+          class="rounded-full w-full bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >{
+            t({
+              en: "Contact us",
+              fr: "Nous contactez",
+            })
+          }</button
+        ></a>
     </div>
   </div> 
 </div>
@@ -169,7 +300,7 @@ const contactSlug = `${basePath}/contact`;
   }
   #mobile-nav {
     transition: inherit;
-    right: -100%;
+    right: -80%;
   }
   #mobile-menu.open-menu #mobile-nav {
     right: 0;

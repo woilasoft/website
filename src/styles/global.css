@@ -4,7 +4,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "basecoat-css";
 @layer base {
   * {
     @apply border-border;
@@ -211,3 +210,6 @@ body {
   }
 }
 
+.non-active .content{
+  filter:opacity(0.5) grayscale(0.5);
+}

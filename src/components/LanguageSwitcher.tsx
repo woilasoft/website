@@ -26,11 +26,11 @@ export default function LanguageSwitcher({ currentLocale, currentUrl }: Props) {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="rounded-full px-3 py-2 flex items-center gap-2 border-gray-300 shadow-sm"
+          className="rounded-full px-3 py-2 max-sm:py-5  flex items-center gap-2 border-gray-300 shadow-sm"
         >
           <FlagIcon country={currentLocale} className="w-10 h-10" />
           <span className="hidden sm:inline-block text-sm font-medium text-foreground">

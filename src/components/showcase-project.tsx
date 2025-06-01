@@ -7,24 +7,8 @@ export default function TabsDemo() {
       title: "Mobile app",
       value: "mobile-app",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 max-sm:p-5 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 content">
           <p className="whitespace-nowrap">Mobile App</p>
-          <p className="line-clamp-2 text-gray-200 text-base font-normal my-5">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum modi
-            illo, voluptatibus, deserunt eveniet iure consequuntur repellat
-            dolorum nisi voluptas nostrum harum, ut libero enim soluta accusamus
-            voluptates? Ut, culpa.
-          </p>
-          <DummyContent />
-        </div>
-      ),
-    },
-    {
-      title: "Desktop App",
-      value: "desktop-app",
-      content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-          <p className="whitespace-nowrap">Desktop App</p>
           <p className="line-clamp-2 text-gray-200 text-base font-normal my-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum modi
             illo, voluptatibus, deserunt eveniet iure consequuntur repellat
@@ -39,7 +23,7 @@ export default function TabsDemo() {
       title: "Website",
       value: "website",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 max-sm:p-5 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 content">
           <p className="whitespace-nowrap">Website</p>
           <p className="line-clamp-2 text-gray-200 text-base font-normal my-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum modi
@@ -55,7 +39,7 @@ export default function TabsDemo() {
       title: "Saas",
       value: "saas",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 max-sm:p-5 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 content">
           <p className="whitespace-nowrap">Saas</p>
           <p className="line-clamp-2 text-gray-200 text-base font-normal my-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum modi
@@ -71,7 +55,7 @@ export default function TabsDemo() {
       title: "Autre",
       value: "autre",
       content: (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 max-sm:p-5 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900 content">
           <p>Autre</p>
           <p className="line-clamp-2 text-gray-200 text-base font-normal my-5">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum modi
@@ -112,7 +96,7 @@ const DummyContent = () => {
       <div className="absolute bottom-0 inset-x-0 h-36 bg-gradient-to-t from-inherit dark:from-inherit/50 to-transparent pointer-events-none data-[expanded=true]:opacity-0 transition-opacity duration-300 ease-in-out" />
       <div
         className={
-          "mx-auto bg-inherit dark:bg-inherit w-fit absolute bottom-8 inset-x-0"
+          "mx-auto dark:bg-inherit w-fit absolute bottom-8 inset-x-0"
         }
       >
         <Button className="w-full bg-transparent  text-white bg-secondary rounded-full text-lg p-5">

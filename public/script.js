@@ -235,9 +235,9 @@
   window.onpageshow = onPageShow;
 
   document.addEventListener("astro:after-swap", () => {
-    initTheme();
+    //initTheme();
     onLoad();
     onPageShow();
-    fetchMetric();
+    //fetchMetric();
   });
 })();

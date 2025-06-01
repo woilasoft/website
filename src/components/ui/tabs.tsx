@@ -1,5 +1,5 @@
 "use client";
-
+import {clsx} from "clsx"
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -40,7 +40,7 @@ export const Tabs = ({
     <>
       <div
         className={cn(
-          "flex flex-row items-center mb-10 justify-center [perspective:1000px] overflow-y-hidden relative pl-5 py-2 overflow-x-auto  scrollbar-hide no-visible-scrollbar max-w-full w-full",
+          "flex flex-row items-center mb-10  justify-center [perspective:1000px] overflow-y-hidden relative pl-5 py-2 overflow-x-auto  scrollbar-hide no-visible-scrollbar max-w-full w-full",
           containerClassName
         )}
       >
@@ -77,7 +77,7 @@ export const Tabs = ({
         active={active}
         key={active.value}
         hovering={hovering}
-        className={cn("mt-16 max-sm:mt-[80px]", contentClassName)}
+        className={cn("mt-16  max-sm:mt-[60px]", contentClassName)}
       />
     </>
   );
@@ -112,7 +112,7 @@ export const FadeInDiv = ({
           animate={{
             y: isActive(tab) ? [0, 40, 0] : 0,
           }}
-          className={cn("w-full h-full absolute top-0 left-0", className)}
+          className={clsx("w-full h-full absolute top-0 left-0", className,isActive(tab)?"active-tab":"non-active")}
         >
           {tab.content}
         </motion.div>
