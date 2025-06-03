@@ -44,14 +44,6 @@ const languages: Language[] = [
 ];
 
 const { lang } = Astro.params;
-
-const basePath = lang ? `/${lang}` : "";
-const homeSlug = `${basePath}`;
-const blogSlug = `${basePath}/blog`;
-const aboutSlug = `${basePath}/about`;
-const serviceSlug = `${basePath}/service`;
-const projectSlug = `${basePath}/projects`;
-const contactSlug = `${basePath}/contact`;
 ---
 
 <header
@@ -162,174 +154,166 @@ const contactSlug = `${basePath}/contact`;
         }
       </a>
     </div>
-    <div class="flex gap-2 items-center">
+    <div class="max-lg:hidden flex gap-x-2 items-center">
+      <!-- <ThemeSwitcher client:load /> -->
+
       <LanguageSwitcher
         currentLocale={Astro.currentLocale!}
         currentUrl={Astro.url!}
         client:load
       />
-      <div class="max-lg:hidden flex gap-x-2 items-center">
-        <!-- <ThemeSwitcher client:load /> -->
-
-        <LanguageSwitcher
-          currentLocale={Astro.currentLocale!}
-          currentUrl={Astro.url!}
-          client:load
-        />
-        <a
-          href={getRelativeLocaleUrl(locale, "/contact")}
-          class={isActive("/contact") ? "text-secondary" : "text-primary"}
+      <a
+        href={getRelativeLocaleUrl(locale, "/contact")}
+        class={isActive("/contact") ? "text-secondary" : "text-primary"}
+      >
+        <ShimmerButton className="px-3.5 py-2.5 text-sm" background={"#0d1961"}
+          >{
+            t({
+              en: "Contact us",
+              fr: "Nous contactez",
+            })
+          }</ShimmerButton
         >
-          <ShimmerButton
-            className="px-3.5 py-2.5 text-sm"
-            background={"#0d1961"}
-            >{
-              t({
-                en: "Contact us",
-                fr: "Nous contactez",
-              })
-            }</ShimmerButton
-          >
-        </a>
-      </div>
+      </a>
     </div>
-    <!-- Mobile menu, show/hide based on menu open state. -->
   </nav>
-  <div id="mobile-menu" class="lg:hidden" role="dialog" aria-modal="true">
-    <!-- Background backdrop, show/hide based on slide-over state. -->
-    <div id="close" class="fixed inset-0 z-50"></div>
-    <div
-      id="mobile-nav"
-      class="fixed inset-y-0 right-0 z-50 w-[80%] overflow-y-auto bg-white px-4 py-4 sm:max-w-sm"
-    >
-      <div class="flex items-center justify-between">
-        <a
-          href={getRelativeLocaleUrl(locale, "/")}
-          class={"-m-1.5 " + isActive("/") ? "text-secondary" : "text-primary"}
+  <!-- Mobile menu, show/hide based on menu open state. -->
+</header>
+<div id="mobile-menu" class="lg:hidden" role="dialog" aria-modal="true">
+  <!-- Background backdrop, show/hide based on slide-over state. -->
+  <div id="close" class="fixed inset-0 z-50"></div>
+  <div
+    id="mobile-nav"
+    class="fixed inset-y-0 right-0 z-50 w-[80%] overflow-y-auto bg-white px-4 py-4 sm:max-w-sm"
+  >
+    <div class="flex items-center justify-between">
+      <a
+        href={getRelativeLocaleUrl(locale, "/")}
+        class={"-m-1.5 " + isActive("/") ? "text-secondary" : "text-primary"}
+      >
+        <span class="sr-only">{SITE_TITLE}</span>
+        <Fragment set:html={Logo} />
+      </a>
+      <button
+        type="button"
+        id="close"
+        class="-m-2.5 rounded-md p-2.5 text-gray-700 sm:hidden"
+      >
+        <span class="sr-only">Close menu</span>
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
         >
-          <span class="sr-only">{SITE_TITLE}</span>
-          <Fragment set:html={Logo} />
-        </a>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="space-y-4 py-6 flex flex-col">
+      <a
+        href={getRelativeLocaleUrl(locale, "/")}
+        class={isActive("/") ? "text-secondary" : "text-primary"}
+      >
+        {
+          t({
+            en: "Home",
+            fr: "Accueil",
+          })
+        }
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, "/projects")}
+        class={isActive("/projects") ? "text-secondary" : "text-primary"}
+      >
+        {
+          t({
+            en: "Projects",
+            fr: "Projets",
+          })
+        }
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, "/services")}
+        class={isActive("/services") ? "text-secondary" : "text-primary"}
+      >
+        {
+          t({
+            en: "Services",
+            fr: "Services",
+          })
+        }
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, "/blogs")}
+        class={isActive("/blogs") ? "text-secondary" : "text-primary"}
+      >
+        {
+          t({
+            en: "Blogs",
+            fr: "Blogs",
+          })
+        }
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, "/about")}
+        class={isActive("/about") ? "text-secondary" : "text-primary"}
+      >
+        {
+          t({
+            en: "About",
+            fr: "À propos",
+          })
+        }
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, "/contact")}
+        class={isActive("/contact") ? "text-secondary" : "text-primary"}
+      >
         <button
-          type="button"
-          id="close"
-          class="-m-2.5 rounded-md p-2.5 text-gray-700 sm:hidden"
-        >
-          <span class="sr-only">Close menu</span>
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="space-y-4 py-6 flex flex-col">
-        <a
-          href={getRelativeLocaleUrl(locale, "/")}
-          class={isActive("/") ? "text-secondary" : "text-primary"}
-        >
-          {
+          class="rounded-full w-full bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >{
             t({
-              en: "Home",
-              fr: "Accueil",
+              en: "Contact us",
+              fr: "Nous contactez",
             })
-          }
-        </a>
-        <a
-          href={getRelativeLocaleUrl(locale, "/projects")}
-          class={isActive("/projects") ? "text-secondary" : "text-primary"}
-        >
-          {
-            t({
-              en: "Projects",
-              fr: "Projets",
-            })
-          }
-        </a>
-        <a
-          href={getRelativeLocaleUrl(locale, "/services")}
-          class={isActive("/services") ? "text-secondary" : "text-primary"}
-        >
-          {
-            t({
-              en: "Services",
-              fr: "Services",
-            })
-          }
-        </a>
-        <a
-          href={getRelativeLocaleUrl(locale, "/blogs")}
-          class={isActive("/blogs") ? "text-secondary" : "text-primary"}
-        >
-          {
-            t({
-              en: "Blogs",
-              fr: "Blogs",
-            })
-          }
-        </a>
-        <a
-          href={getRelativeLocaleUrl(locale, "/about")}
-          class={isActive("/about") ? "text-secondary" : "text-primary"}
-        >
-          {
-            t({
-              en: "About",
-              fr: "À propos",
-            })
-          }
-        </a>
-        <a
-          href={getRelativeLocaleUrl(locale, "/contact")}
-          class={isActive("/contact") ? "text-secondary" : "text-primary"}
-        >
-          <button
-            class="rounded-full w-full bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >{
-              t({
-                en: "Contact us",
-                fr: "Nous contactez",
-              })
-            }</button
-          ></a
-        >
-      </div>
+          }</button
+        ></a
+      >
     </div>
   </div>
-  <style>
-    #logo {
-      width: 45px;
-    }
-    #mobile-menu {
-      transition: all 0.4s ease-in-out;
-    }
-    div#close {
-      transition: inherit;
-      background: black;
-      opacity: 0;
-      pointer-events: none;
-    }
-    #mobile-nav {
-      transition: inherit;
-      right: -80%;
-    }
-    #mobile-menu.open-menu #mobile-nav {
-      right: 0;
-    }
-    #mobile-menu.open-menu div#close {
-      pointer-events: all;
-      opacity: 0.6;
-      /* backdrop-filter: blur(4px); */
-    }
-    /*
+</div>
+<style>
+  #logo {
+    width: 45px;
+  }
+  #mobile-menu {
+    transition: all 0.4s ease-in-out;
+  }
+  div#close {
+    transition: inherit;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+  }
+  #mobile-nav {
+    transition: inherit;
+    right: -80%;
+  }
+  #mobile-menu.open-menu #mobile-nav {
+    right: 0;
+  }
+  #mobile-menu.open-menu div#close {
+    pointer-events: all;
+    opacity: 0.6;
+    /* backdrop-filter: blur(4px); */
+  }
+  /*
     #23262F
     #header::after {
       content: "";
@@ -340,5 +324,4 @@ const contactSlug = `${basePath}/contact`;
       height: 100%;
       background: linear-gradient(110deg, blue, 45%, #f7f7f7, 55%, blue);
     }*/
-  </style>
-</header>
+</style>

@@ -23,12 +23,11 @@ import Teams from "@/components/TeamSection.astro";
 import BlogSection from "@/components/blogSection.astro";
 import { localeParams } from "@/i18n";
 const locale = Astro.currentLocale as Lang;
-import TeamSection from "@/components/team-section"
+import TeamSection from "@/components/team-section";
 export const getStaticPaths = () =>
   Object.keys(LOCALES).map((lang) => ({
     params: { lang },
   }));
-
 ---
 
 <Layout>
@@ -51,7 +50,7 @@ export const getStaticPaths = () =>
     <ShowCaseProject client:load />
   </div>
   <!-- <Teams /> -->
-  <TeamSection client:load/>
+  <TeamSection client:load />
   <div class="screen-wrapper">
     <BlogSection />
   </div>
@@ -70,8 +69,10 @@ export const getStaticPaths = () =>
     <div
       class="relative z-10 flex flex-col justify-center items-center h-full text-center px-4"
     >
-      <h1 class="text-5xl font-bold leading-tight mb-4">Prêt à innover ?</h1>
-      <p class="text-lg text-gray-300 mb-8">
+      <h1 class="text-5xl font-bold leading-tight mb-4 max-sm:text-3xl">
+        Prêt à innover ?
+      </h1>
+      <p class="text-lg text-gray-300 mb-8 max-sm:text-base">
         Nous sommes prêts à vous aider à atteindre vos objectifs et à renforcer
         votre identité numérique sans crainte.
       </p>
@@ -158,6 +159,12 @@ export const getStaticPaths = () =>
 
     &:active {
       translate: 0 1px;
+    }
+    @media only screen and (max-width: 400px) {
+      & {
+        font-size: 1rem;
+        padding: 1rem 2rem;
+      }
     }
   }
 
