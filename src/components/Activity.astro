@@ -1,5 +1,30 @@
+---
+const services = [
+  {
+    title: "Applications de bureau",
+    description:
+      "Nous créons des logiciels de bureau sur mesure, robustes et sécurisés, pour améliorer vos opérations internes et vous permettre de travailler plus efficacement.",
+  },
+  {
+    title: "Sites web",
+    description:
+      "Que ce soit un site vitrine, un e-commerce ou une plateforme complexe, nous développons des sites web rapides, modernes et parfaitement optimisés pour tous les appareils.",
+  },
+  {
+    title: "Applications mobiles",
+    description:
+      "Nous développons des applications mobiles intuitives et performantes, adaptées à vos besoins, que ce soit pour Android ou iOS.",
+  },
+  {
+    title: "Solutions SaaS",
+    description:
+      "Profitez de nos solutions SaaS flexibles, conçues pour répondre aux besoins spécifiques de votre entreprise et garantir une scalabilité à long terme.",
+  },
+];
+---
+
 <section
-  class="w-full bg-primary text-center py-20 px-8 xl:px-0 flex flex-col justify-center"
+  class="w-full bg-primary text-center py-20 px-8 xl:px-0 flex flex-col justify-center max-sm:px-4"
 >
   <span
     class="text-gray-400 text-lg max-w-lg mx-auto mb-2 capitalize flex items-center"
@@ -25,58 +50,20 @@
   <div
     class="grid-offer text-left grid sm:grid-cols-2 md:grid-cols-2 gap-5 max-w-5xl mx-auto"
   >
-    <div class="card bg-gray-800 p-10 relative">
-      <div class="circle"></div>
-      <div class="relative lg:pr-52">
-        <h2 class="capitalize text-white mb-4 text-2xl xl:text-3xl">
-          Applications de bureau
-        </h2>
-        <p class="text-gray-300">
-          Nous créons des logiciels de bureau sur mesure, robustes et sécurisés,
-          pour améliorer vos opérations internes et vous permettre de travailler
-          plus efficacement.
-        </p>
-      </div>
-      <div class="icon"></div>
-    </div>
-    <div class="card bg-gray-800 p-10 relative">
-      <div class="circle"></div>
-      <div class="relative lg:pl-48">
-        <h2 class="capitalize text-white mb-4 text-2xl xl:text-3xl">
-          Sites web
-        </h2>
-        <p class="text-gray-300">
-          Que ce soit un site vitrine, un e-commerce ou une plateforme complexe,
-          nous développons des sites web rapides, modernes et parfaitement
-          optimisés pour tous les appareils.
-        </p>
-      </div>
-    </div>
-    <div class="card bg-gray-800 p-10 relative">
-      <div class="circle"></div>
-      <div class="relative lg:pr-44">
-        <h2 class="capitalize text-white mb-4 text-2xl xl:text-3xl">
-          Applications mobiles
-        </h2>
-        <p class="text-gray-300">
-          Nous développons des applications mobiles intuitives et performantes,
-          adaptées à vos besoins, que ce soit pour Android ou iOS.
-        </p>
-      </div>
-    </div>
-    <div class="card bg-gray-800 p-10 relative">
-      <div class="circle"></div>
-      <div class="relative lg:pl-48">
-        <h2 class="capitalize text-white mb-4 text-2xl xl:text-3xl">
-          Solutions SaaS
-        </h2>
-        <p class="text-gray-300">
-          Profitez de nos solutions SaaS flexibles, conçues pour répondre aux
-          besoins spécifiques de votre entreprise et garantir une scalabilité à
-          long terme.
-        </p>
-      </div>
-    </div>
+    {
+      services.map((service, index) => (
+        <div class="card bg-gray-800 p-10 relative max-sm:p-5">
+          <div class="circle" />
+          <div class={`relative ${index % 2 === 0 ? "lg:pr-52" : "lg:pl-48"}`}>
+            <h2 class="capitalize text-white mb-4 text-2xl xl:text-3xl">
+              {service.title}
+            </h2>
+            <p class="text-gray-300">{service.description}</p>
+          </div>
+          <div class="icon" />
+        </div>
+      ))
+    }
   </div>
   <style>
     /* @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap"); */
@@ -154,24 +141,23 @@
     }
 
     .card:nth-child(2) .circle {
-      background: url("/images/web-services-vs-web-application.webp")
-        no-repeat 50% 50% / cover;
+      background: url("/images/web-services-vs-web-application.webp") no-repeat
+        50% 50% / cover;
       bottom: 0;
       left: 0;
       clip-path: circle(calc(6.25rem + 7.5vw) at 0% 100%);
     }
 
     .card:nth-child(3) .circle {
-      background: url("/images/Mobile-App-for-Logistics-Company.jpg")
-        no-repeat 50% 50% / cover;
+      background: url("/images/Mobile-App-for-Logistics-Company.jpg") no-repeat
+        50% 50% / cover;
       top: 0;
       right: 0;
       clip-path: circle(calc(6.25rem + 7.5vw) at 100% 0%);
     }
 
     .card:nth-child(4) .circle {
-      background: url("/images/SaaS.jpg")
-        no-repeat 50% 50% / cover;
+      background: url("/images/SaaS.jpg") no-repeat 50% 50% / cover;
       top: 0;
       left: 0;
       clip-path: circle(calc(6.25rem + 7.5vw) at 0% 0%);
