@@ -6,13 +6,18 @@ import clsx from "clsx";
 import Logo from "@/assets/icons/logo.svg?raw";
 import LogoT from "@/assets/Logo.astro";
 import ShimmerButton from "@/components/ui/shimmer-button";
-import  LanguageSwitcher from "@/components/LanguageSwitcher" 
-import { ChevronDown, Menu, Search, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { cn } from "@/lib/utils"
-import { FlagIcon } from "@/components/flag-icon"
-import { ThemeSwitcher } from "@/components/theme-switcher-cc"
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { ChevronDown, Menu, Search, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+import { FlagIcon } from "@/components/flag-icon";
+import { ThemeSwitcher } from "@/components/theme-switcher-cc";
 import { useTranslations, type Lang } from "@/i18n";
 import { getRelativeLocaleUrl } from "astro:i18n";
 const t = useTranslations(Astro.currentLocale as Lang);
@@ -22,11 +27,10 @@ const locale = Astro.currentLocale as Lang;
 const isActive = (path: string) =>
   getRelativeLocaleUrl(locale, path) === Astro.url.pathname;
 
-
 type Language = {
-  code: string
-  name: string
-}
+  code: string;
+  name: string;
+};
 
 const languages: Language[] = [
   {
@@ -37,7 +41,7 @@ const languages: Language[] = [
     code: "fr",
     name: "Français",
   },
-]
+];
 
 const { lang } = Astro.params;
 
@@ -48,7 +52,6 @@ const aboutSlug = `${basePath}/about`;
 const serviceSlug = `${basePath}/service`;
 const projectSlug = `${basePath}/projects`;
 const contactSlug = `${basePath}/contact`;
-
 ---
 
 <header
@@ -66,15 +69,21 @@ const contactSlug = `${basePath}/contact`;
   >
     <div id="logo">
       <a
-          href={getRelativeLocaleUrl(locale, "/")}
-          class={"p-1.5 pl-3 "+isActive("/") ? "text-secondary" : "text-primary" }
-        >
-          <span class="sr-only">{SITE_TITLE}</span>
-           <LogoT width={35} />
-        </a>
+        href={getRelativeLocaleUrl(locale, "/")}
+        class={"p-1.5 pl-3 " + isActive("/")
+          ? "text-secondary"
+          : "text-primary"}
+      >
+        <span class="sr-only">{SITE_TITLE}</span>
+        <LogoT width={35} />
+      </a>
     </div>
-    <div class="flex lg:hidden items-center gap-4 ">
-      <LanguageSwitcher currentLocale={Astro.currentLocale!} currentUrl={Astro.url!} client:load />
+    <div class="flex lg:hidden items-center gap-4">
+      <LanguageSwitcher
+        currentLocale={Astro.currentLocale!}
+        currentUrl={Astro.url!}
+        client:load
+      />
       <button
         type="button"
         id="menu"
@@ -97,124 +106,133 @@ const contactSlug = `${basePath}/contact`;
       </button>
     </div>
     <div class="hidden lg:flex lg:gap-x-4 ml-24">
-       <a
-          href={getRelativeLocaleUrl(locale, "/")}
-          class={isActive("/") ? "text-secondary" : "text-primary"}
-        >
-          {
-            t({
-              en: "Home",
-              fr: "Accueil",
-            })
-          }
-        </a>
-        <a
-          href={getRelativeLocaleUrl(locale, "/projects")}
-          class={isActive("/projects") ? "text-secondary" : "text-primary"}
-        >
-          {
-            t({
-              en: "Projects",
-              fr: "Projets",
-            })
-          }
-        </a>
-       <a
-          href={getRelativeLocaleUrl(locale, "/services")}
-          class={isActive("/services") ? "text-secondary" : "text-primary"}
-        >
-          {
-            t({
-              en: "Services",
-              fr: "Services",
-            })
-          }
-        </a>
       <a
-          href={getRelativeLocaleUrl(locale, "/blogs")}
-          class={isActive("/blogs") ? "text-secondary" : "text-primary"}
-        >
-          {
-            t({
-              en: "Blogs",
-              fr: "Blogs",
-            })
-          }
-        </a>
+        href={getRelativeLocaleUrl(locale, "/")}
+        class={isActive("/") ? "text-secondary" : "text-primary"}
+      >
+        {
+          t({
+            en: "Home",
+            fr: "Accueil",
+          })
+        }
+      </a>
       <a
-          href={getRelativeLocaleUrl(locale, "/about")}
-          class={isActive("/about") ? "text-secondary" : "text-primary"}
-        >
-          {
-            t({
-              en: "About",
-              fr: "À propos",
-            })
-          }
-        </a>
-      
+        href={getRelativeLocaleUrl(locale, "/projects")}
+        class={isActive("/projects") ? "text-secondary" : "text-primary"}
+      >
+        {
+          t({
+            en: "Projects",
+            fr: "Projets",
+          })
+        }
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, "/services")}
+        class={isActive("/services") ? "text-secondary" : "text-primary"}
+      >
+        {
+          t({
+            en: "Services",
+            fr: "Services",
+          })
+        }
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, "/blogs")}
+        class={isActive("/blogs") ? "text-secondary" : "text-primary"}
+      >
+        {
+          t({
+            en: "Blogs",
+            fr: "Blogs",
+          })
+        }
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, "/about")}
+        class={isActive("/about") ? "text-secondary" : "text-primary"}
+      >
+        {
+          t({
+            en: "About",
+            fr: "À propos",
+          })
+        }
+      </a>
     </div>
-    <div class="max-lg:hidden flex gap-x-2 items-center">
-      <!-- <ThemeSwitcher client:load /> -->
-     
-      <LanguageSwitcher currentLocale={Astro.currentLocale!} currentUrl={Astro.url!} client:load />
+    <div class="flex gap-2 items-center">
+      <LanguageSwitcher
+        currentLocale={Astro.currentLocale!}
+        currentUrl={Astro.url!}
+        client:load
+      />
+      <div class="max-lg:hidden flex gap-x-2 items-center">
+        <!-- <ThemeSwitcher client:load /> -->
+
+        <LanguageSwitcher
+          currentLocale={Astro.currentLocale!}
+          currentUrl={Astro.url!}
+          client:load
+        />
         <a
           href={getRelativeLocaleUrl(locale, "/contact")}
           class={isActive("/contact") ? "text-secondary" : "text-primary"}
         >
-          
-          <ShimmerButton className="px-3.5 py-2.5 text-sm" background={"#0d1961"}
-          >{
-            t({
-              en: "Contact us",
-              fr: "Nous contactez",
-            })
-          }</ShimmerButton
-        >
+          <ShimmerButton
+            className="px-3.5 py-2.5 text-sm"
+            background={"#0d1961"}
+            >{
+              t({
+                en: "Contact us",
+                fr: "Nous contactez",
+              })
+            }</ShimmerButton
+          >
         </a>
+      </div>
     </div>
+    <!-- Mobile menu, show/hide based on menu open state. -->
   </nav>
-  <!-- Mobile menu, show/hide based on menu open state. -->
-</header>
-<div id="mobile-menu" class="lg:hidden" role="dialog" aria-modal="true">
-  <!-- Background backdrop, show/hide based on slide-over state. -->
-  <div id="close" class="fixed inset-0 z-50"></div>
-  <div
-    id="mobile-nav"
-    class="fixed inset-y-0 right-0 z-50 w-[80%] overflow-y-auto bg-white px-4 py-4 sm:max-w-sm"
-  >
-    <div class="flex items-center justify-between">
-      <a
+  <div id="mobile-menu" class="lg:hidden" role="dialog" aria-modal="true">
+    <!-- Background backdrop, show/hide based on slide-over state. -->
+    <div id="close" class="fixed inset-0 z-50"></div>
+    <div
+      id="mobile-nav"
+      class="fixed inset-y-0 right-0 z-50 w-[80%] overflow-y-auto bg-white px-4 py-4 sm:max-w-sm"
+    >
+      <div class="flex items-center justify-between">
+        <a
           href={getRelativeLocaleUrl(locale, "/")}
-          class={"-m-1.5 "+isActive("/") ? "text-secondary" : "text-primary"}
+          class={"-m-1.5 " + isActive("/") ? "text-secondary" : "text-primary"}
         >
           <span class="sr-only">{SITE_TITLE}</span>
-        <Fragment set:html={Logo} />
+          <Fragment set:html={Logo} />
         </a>
-      <button
-        type="button"
-        id="close"
-        class="-m-2.5 rounded-md p-2.5 text-gray-700 sm:hidden"
-      >
-        <span class="sr-only">Close menu</span>
-        <svg
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          aria-hidden="true"
+        <button
+          type="button"
+          id="close"
+          class="-m-2.5 rounded-md p-2.5 text-gray-700 sm:hidden"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-      
-    </div>
-    <div class="space-y-4 py-6 flex flex-col">
-      <a
+          <span class="sr-only">Close menu</span>
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="space-y-4 py-6 flex flex-col">
+        <a
           href={getRelativeLocaleUrl(locale, "/")}
           class={isActive("/") ? "text-secondary" : "text-primary"}
         >
@@ -236,7 +254,7 @@ const contactSlug = `${basePath}/contact`;
             })
           }
         </a>
-       <a
+        <a
           href={getRelativeLocaleUrl(locale, "/services")}
           class={isActive("/services") ? "text-secondary" : "text-primary"}
         >
@@ -247,7 +265,7 @@ const contactSlug = `${basePath}/contact`;
             })
           }
         </a>
-      <a
+        <a
           href={getRelativeLocaleUrl(locale, "/blogs")}
           class={isActive("/blogs") ? "text-secondary" : "text-primary"}
         >
@@ -258,7 +276,7 @@ const contactSlug = `${basePath}/contact`;
             })
           }
         </a>
-      <a
+        <a
           href={getRelativeLocaleUrl(locale, "/about")}
           class={isActive("/about") ? "text-secondary" : "text-primary"}
         >
@@ -269,48 +287,49 @@ const contactSlug = `${basePath}/contact`;
             })
           }
         </a>
-      <a
+        <a
           href={getRelativeLocaleUrl(locale, "/contact")}
           class={isActive("/contact") ? "text-secondary" : "text-primary"}
         >
           <button
-          class="rounded-full w-full bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >{
-            t({
-              en: "Contact us",
-              fr: "Nous contactez",
-            })
-          }</button
-        ></a>
+            class="rounded-full w-full bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >{
+              t({
+                en: "Contact us",
+                fr: "Nous contactez",
+              })
+            }</button
+          ></a
+        >
+      </div>
     </div>
-  </div> 
-</div>
-<style>
-  #logo{
-    width:45px;
-  }
-  #mobile-menu {
-    transition: all 0.4s ease-in-out;
-  }
-  div#close {
-    transition: inherit;
-    background: black;
-    opacity: 0;
-    pointer-events: none;
-  }
-  #mobile-nav {
-    transition: inherit;
-    right: -80%;
-  }
-  #mobile-menu.open-menu #mobile-nav {
-    right: 0;
-  }
-  #mobile-menu.open-menu div#close {
-    pointer-events: all;
-    opacity: 0.6;
-    /* backdrop-filter: blur(4px); */
-  }
-  /*
+  </div>
+  <style>
+    #logo {
+      width: 45px;
+    }
+    #mobile-menu {
+      transition: all 0.4s ease-in-out;
+    }
+    div#close {
+      transition: inherit;
+      background: black;
+      opacity: 0;
+      pointer-events: none;
+    }
+    #mobile-nav {
+      transition: inherit;
+      right: -80%;
+    }
+    #mobile-menu.open-menu #mobile-nav {
+      right: 0;
+    }
+    #mobile-menu.open-menu div#close {
+      pointer-events: all;
+      opacity: 0.6;
+      /* backdrop-filter: blur(4px); */
+    }
+    /*
     #23262F
     #header::after {
       content: "";
@@ -321,4 +340,5 @@ const contactSlug = `${basePath}/contact`;
       height: 100%;
       background: linear-gradient(110deg, blue, 45%, #f7f7f7, 55%, blue);
     }*/
-</style>
+  </style>
+</header>
