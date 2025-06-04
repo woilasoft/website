@@ -1,5 +1,5 @@
 "use client";
-import "../styles/global.css"
+import "../styles/global.css";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -16,9 +16,16 @@ import { useEffect, useState } from "react";
 type Props = {
   currentLocale: string;
   currentUrl: URL;
+  className?: string;
+  labelClassName?: string;
 };
 
-export default function LanguageSwitcher({ currentLocale, currentUrl }: Props) {
+export default function LanguageSwitcher({
+  currentLocale,
+  currentUrl,
+  className="",
+  labelClassName="",
+}: Props) {
   const locales = getLocalePaths(currentUrl);
   const handleSelect = (lang: string, path: string) => {
     localStorage.selectedLang = lang;
@@ -30,13 +37,21 @@ export default function LanguageSwitcher({ currentLocale, currentUrl }: Props) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="rounded-full px-3 py-2 max-sm:py-5  flex items-center gap-2 border-gray-300 shadow-sm"
+          className={cn(
+            "rounded-full px-3 py-2 max-sm:py-5  flex items-center gap-2 border-gray-300 shadow-sm",
+            className
+          )}
         >
           <FlagIcon country={currentLocale} className="w-10 h-10" />
-          <span className="hidden sm:inline-block text-sm font-medium text-foreground">
+          <span
+            className={cn(
+              "hidden sm:inline-block text-sm font-medium text-foreground",
+              labelClassName
+            )}
+          >
             {LOCALES[currentLocale].label}
           </span>
-          <ChevronDown className="w-4 h-4 hidden sm:inline-block" />
+          <ChevronDown className={cn("w-4 h-4 hidden sm:inline-block",labelClassName)} />
         </Button>
       </DropdownMenuTrigger>
 
