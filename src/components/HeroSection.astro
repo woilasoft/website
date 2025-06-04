@@ -23,20 +23,20 @@ const translations = {
     fr: "Innovons ensemble !",
   },
   paragraph1: {
-    en: "your partner for custom digital solutions.",
-    fr: "votre partenaire pour des solutions numériques et personnalisées.",
+    en: "your partner for custom digital solutions. We create the digital solutions of ",
+    fr: "votre partenaire pour des solutions numériques et personnalisées. Nous créons les solutions numériques de ",
   },
   p2_start: {
-    en: "We create the digital solutions of ",
-    fr: "Nous créons les solutions numériques de ",
+    en: "",
+    fr: "",
   },
   p2_tomorrow: {
     en: "tomorrow",
     fr: "demain",
   },
   p2_middle: {
-    en: ", starting ",
-    fr: ", dès ",
+    en: " starting ",
+    fr: " dès ",
   },
   p2_today: {
     en: "today",
@@ -99,13 +99,20 @@ const translations = {
   <p
     class="mt-6 max-sm:text-normalsize max-sm:w-full max-w-screen-lg lg:text-xl text-gray-600 text-center"
   >
-    <span class="font-bold">Woilasoft</span>, {t(translations.paragraph1)}{" "}
+    <!-- <span class="font-bold">Woilasoft</span>, {t(translations.paragraph1)}{" "}
     {t(translations.p2_start)}<span class="line-through"
       >{t(translations.p2_tomorrow)}</span
     >{t(translations.p2_middle)}<strong class="font-bold"
       ><br />{t(translations.p2_today)}</strong
     >
-    <span class="max-sm:hidden">{t(translations.paragraph3)}</span>
+    <span class="max-sm:hidden">{t(translations.paragraph3)}</span> -->
+    <span class="font-bold">Woilasoft</span>, {t(translations.paragraph1)}
+    <span class="line-through">{t(translations.p2_tomorrow)}</span>, {
+      t(translations.p2_middle)
+    }
+    <strong class="font-bold">{t(translations.p2_today)}</strong>!. <span
+      class="max-sm:hidden">{t(translations.paragraph3)}</span
+    >
   </p>
   <div class="flex items-center gap-4 mt-8">
     {/* Added mt-8 for spacing */}
