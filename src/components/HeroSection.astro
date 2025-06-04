@@ -2,45 +2,79 @@
 // import GridPattern from "./ui/grid-pattern";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
-import AnimatedGradientText from "./ui/animated-gradient-text";
-import ShimmerButton from "./ui/shimmer-button";
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import AnimatedGradientText from "./ui/animated-gradient-text"; // Assuming .astro if it contains Astro-specific logic or only used in Astro
+import ShimmerButton from "./ui/shimmer-button"; // Assuming .astro
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern"; // Assuming .astro
+
+import { useTranslations, type Lang } from "@/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
+// Translations
+const translations = {
+  introduction: {
+    en: "Introducing Woilasoft",
+    fr: "Introduction Woilasoft",
+  },
+  mainHeading: {
+    en: "Let's innovate together!",
+    fr: "Innovons ensemble !",
+  },
+  paragraph1: {
+    en: "your partner for custom digital solutions.",
+    fr: "votre partenaire pour des solutions numériques et personnalisées.",
+  },
+  p2_start: {
+    en: "We create the digital solutions of ",
+    fr: "Nous créons les solutions numériques de ",
+  },
+  p2_tomorrow: {
+    en: "tomorrow",
+    fr: "demain",
+  },
+  p2_middle: {
+    en: ", starting ",
+    fr: ", dès ",
+  },
+  p2_today: {
+    en: "today",
+    fr: "aujourd'hui",
+  },
+  p2_end: {
+    en: "!",
+    fr: "!.",
+  },
+  paragraph3: {
+    en: "Whether you are a startup or an established company, we are here to help you transform your digital presence.",
+    fr: "Que vous soyez une start-up ou une entreprise établie, nous sommes là pour vous aider à transformer votre présence numérique.",
+  },
+  seeProjects: {
+    en: "See our projects",
+    fr: "Voir nos projets",
+  },
+  contactUs: {
+    en: "Contact us",
+    fr: "Nous contacter", // Corrected French
+  },
+};
 ---
 
 <div
   class="relative screen-wrapper flex h-[80vh] max-sm:h-[70vh] w-full flex-col items-center justify-center bg-background"
 >
-  <!-- <GridPattern
-    squares={[
-      [4, 4],
-      [5, 1],
-      [8, 2],
-      [5, 3],
-      [5, 5],
-      [10, 10],
-      [12, 15],
-      [15, 10],
-      [10, 15],
-      [15, 10],
-      [10, 15],
-      [15, 10],
-    ]}
-    className={cn(
-      "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
-      "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12 z-[-1]"
-    )}
-  /> -->
   <AnimatedGridPattern
-        client:load
-        numSquares={30}
-        maxOpacity={0.1}
-        duration={3}
-        repeatDelay={1}
-        className={cn(
-          "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
-          "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
-        )}
-      />
+    client:load
+    numSquares={30}
+    maxOpacity={0.1}
+    duration={3}
+    repeatDelay={1}
+    className={cn(
+      "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
+      "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12"
+    )}
+  />
   <div class="py-5">
     <AnimatedGradientText>
       🎉 <hr class="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
@@ -49,7 +83,7 @@ import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
           `inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`
         )}
       >
-        Introduction Woilasoft
+        {t(translations.introduction)}
       </span>
       <ChevronRight
         className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5"
@@ -57,25 +91,27 @@ import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
     </AnimatedGradientText>
   </div>
 
-  <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-6xl">
-    Innovons ensemble !
+  <h1
+    class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-6xl text-center"
+  >
+    {t(translations.mainHeading)}
   </h1>
   <p
     class="mt-6 max-sm:text-normalsize max-sm:w-full max-w-screen-lg lg:text-xl text-gray-600 text-center"
   >
-    <span class="font-bold">Woilasoft</span>, votre parténaire pour des
-    solutions numériques et personnalisées. Nous créons les solutions numériques
-    de <span class="line-through">demain</span>, dès <strong class="font-bold"
-      >aujourd'hui</strong
-    >!. <span class="max-sm:hidden"
-      >Que vous soyez une start-up ou une entreprise établie, nous sommes là
-      pour vous aider à transformer votre présence numérique.</span
+    <span class="font-bold">Woilasoft</span>, {t(translations.paragraph1)}{" "}
+    {t(translations.p2_start)}<span class="line-through"
+      >{t(translations.p2_tomorrow)}</span
+    >{t(translations.p2_middle)}<strong class="font-bold"
+      ><br />{t(translations.p2_today)}</strong
     >
+    <span class="max-sm:hidden">{t(translations.paragraph3)}</span>
   </p>
-  <div class="flex items-center gap-4">
+  <div class="flex items-center gap-4 mt-8">
+    {/* Added mt-8 for spacing */}
     <a
-      href="#_"
-      class="relative inline-flex items-center px-12 py-3  max-sm:px-5 max-sm:!px-3 max-sm:!py-2 overflow-hidden font-medium text-secondary border-2 border-secondary rounded-full hover:text-white group hover:bg-gray-50"
+      href={getRelativeLocaleUrl(locale, "/projects")}
+      class="relative inline-flex items-center px-12 py-3 max-sm:!px-3 max-sm:!py-2 overflow-hidden font-medium text-secondary border-2 border-secondary rounded-full hover:text-white group hover:bg-gray-50"
     >
       <span
         class="absolute left-0 block w-full h-full transition-all bg-transparent opacity-100 group-hover:bg-secondary top-0 duration-400 ease"
@@ -97,13 +133,20 @@ import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
             d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
         </svg>
       </span>
-      <span class="relative text-lg max-sm:text-[1em] whitespace-nowrap"
-        >Voir nos projets</span
-      >
+      <span class="relative text-lg max-sm:text-[1em] whitespace-nowrap">
+        {t(translations.seeProjects)}
+      </span>
     </a>
-    <ShimmerButton className="my-5 max-sm:!px-3 max-sm:!py-2" background={"#0d1961"}>
-      <span class="text-lg max-sm:!text-[1em]">Nous contactez</span>
-    </ShimmerButton>
+    <a href={getRelativeLocaleUrl(locale, "/contact")}>
+      <ShimmerButton
+        className="my-5 max-sm:!px-3 max-sm:!py-2"
+        background={"#0d1961"}
+      >
+        <span class="text-lg max-sm:!text-[1em] whitespace-nowrap">
+          {t(translations.contactUs)}
+        </span>
+      </ShimmerButton>
+    </a>
   </div>
 </div>
 <style>

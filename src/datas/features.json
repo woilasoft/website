@@ -1,22 +1,46 @@
 [
   {
-    "heading": "Équipes Dédiées",
-    "content": "Profitez de nos équipes engagées qui assurent un suivi personnalisé de vos projets. Comptez sur notre expertise pour des résultats exceptionnels à chaque étape.",
+    "heading": {
+      "fr": "Équipes Dédiées",
+      "en": "Dedicated Teams"
+    },
+    "content": {
+      "fr": "Profitez de nos équipes engagées qui assurent un suivi personnalisé de vos projets. Comptez sur notre expertise pour des résultats exceptionnels à chaque étape.",
+      "en": "Take advantage of our dedicated teams who provide personalized project follow-up. Rely on our expertise for outstanding results every step of the way."
+    },
     "svg": "groups"
   },
   {
-    "heading": "Simplicité et Efficacité",
-    "content": "Chez woilasoft nos services sont conçus pour être accessibles et rentables.",
+    "heading": {
+      "fr": "Simplicité et Efficacité",
+      "en": "Simplicity and Efficiency"
+    },
+    "content": {
+      "fr": "Chez woilasoft nos services sont conçus pour être accessibles et rentables.",
+      "en": "At Woilasoft, our services are designed to be accessible and cost-effective."
+    },
     "svg": "verified"
   },
   {
-    "heading": "Documentation",
-    "content": "Nous livrons vos solutions grâce à une documentation complète et détaillée. Woilasoft fournit des guides exhaustifs pour une adoption fluide de vos produits.",
+    "heading": {
+      "fr": "Documentation",
+      "en": "Documentation"
+    },
+    "content": {
+      "fr": "Nous livrons vos solutions grâce à une documentation complète et détaillée. Woilasoft fournit des guides exhaustifs pour une adoption fluide de vos produits.",
+      "en": "We deliver your solutions with comprehensive and detailed documentation. Woilasoft provides thorough guides for smooth product adoption."
+    },
     "svg": "books"
   },
   {
-    "heading": "Design Centré sur l'Utilisateur",
-    "content": "Bénéficiez d'une conception centrée sur l'utilisateur, alliant esthétique et fonctionnalité pour une expérience optimale.",
+    "heading": {
+      "fr": "Design Centré sur l'Utilisateur",
+      "en": "User-Centered Design"
+    },
+    "content": {
+      "fr": "Bénéficiez d'une conception centrée sur l'utilisateur, alliant esthétique et fonctionnalité pour une expérience optimale.",
+      "en": "Benefit from user-centered design that combines aesthetics and functionality for an optimal experience."
+    },
     "svg": "frame"
   }
 ]

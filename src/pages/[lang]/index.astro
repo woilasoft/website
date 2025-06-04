@@ -4,25 +4,14 @@ import Layout from "@/layouts/Base.astro";
 const t = useTranslations(Astro.currentLocale as Lang);
 import { getRelativeLocaleUrl } from "astro:i18n";
 
-import heroImageAr from "@/assets/ar/hero.svg";
-import heroImageEn from "@/assets/en/hero.svg";
-import heroImageJa from "@/assets/ja/hero.svg";
-import heroImageZhCn from "@/assets/zh-cn/hero.svg";
-import { Image } from "astro:assets";
-
 import HeroSection from "@/components/HeroSection.astro";
-// import ServiceSection from "@/components/ServiceSection.astro";
 import FeaturesGeneral from "@/components/FeaturesGeneral.astro";
 import ClientsSection from "@/components/TestimonialCompany.astro";
-//import Activity from "@/components/Activity";
 import Activity from "@/components/Activity.astro";
 import ShowCaseProject from "@/components/showcase-project";
 import features from "@/datas/features.json";
 import featureImage from "@/assets/images/section_img.png";
-import Teams from "@/components/TeamSection.astro";
 import BlogSection from "@/components/blogSection.astro";
-import { localeParams } from "@/i18n";
-const locale = Astro.currentLocale as Lang;
 import TeamSection from "@/components/team-section";
 export const getStaticPaths = () =>
   Object.keys(LOCALES).map((lang) => ({

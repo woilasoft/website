@@ -1,23 +1,10 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
-import LangLink from "./LangLink.astro";
 import clsx from "clsx";
 import Logo from "@/assets/icons/logo.svg?raw";
 import LogoT from "@/assets/Logo.astro";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { ChevronDown, Menu, Search, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
-import { FlagIcon } from "@/components/flag-icon";
-import { ThemeSwitcher } from "@/components/theme-switcher-cc";
 import { useTranslations, type Lang } from "@/i18n";
 import { getRelativeLocaleUrl } from "astro:i18n";
 const t = useTranslations(Astro.currentLocale as Lang);
@@ -32,18 +19,21 @@ type Language = {
   name: string;
 };
 
-const languages: Language[] = [
+const navLinks = [
+  { path: "/", key: "home", label: { en: "Home", fr: "Accueil" } },
   {
-    code: "en",
-    name: "English",
+    path: "/projects",
+    key: "projects",
+    label: { en: "Projects", fr: "Projets" },
   },
   {
-    code: "fr",
-    name: "Français",
+    path: "/services",
+    key: "services",
+    label: { en: "Services", fr: "Services" },
   },
+  { path: "/blogs", key: "blogs", label: { en: "Blogs", fr: "Blogs" } },
+  { path: "/about", key: "about", label: { en: "About", fr: "À propos" } },
 ];
-
-const { lang } = Astro.params;
 ---
 
 <header
@@ -98,61 +88,16 @@ const { lang } = Astro.params;
       </button>
     </div>
     <div class="hidden lg:flex lg:gap-x-4 ml-24">
-      <a
-        href={getRelativeLocaleUrl(locale, "/")}
-        class={isActive("/") ? "text-secondary" : "text-primary"}
-      >
-        {
-          t({
-            en: "Home",
-            fr: "Accueil",
-          })
-        }
-      </a>
-      <a
-        href={getRelativeLocaleUrl(locale, "/projects")}
-        class={isActive("/projects") ? "text-secondary" : "text-primary"}
-      >
-        {
-          t({
-            en: "Projects",
-            fr: "Projets",
-          })
-        }
-      </a>
-      <a
-        href={getRelativeLocaleUrl(locale, "/services")}
-        class={isActive("/services") ? "text-secondary" : "text-primary"}
-      >
-        {
-          t({
-            en: "Services",
-            fr: "Services",
-          })
-        }
-      </a>
-      <a
-        href={getRelativeLocaleUrl(locale, "/blogs")}
-        class={isActive("/blogs") ? "text-secondary" : "text-primary"}
-      >
-        {
-          t({
-            en: "Blogs",
-            fr: "Blogs",
-          })
-        }
-      </a>
-      <a
-        href={getRelativeLocaleUrl(locale, "/about")}
-        class={isActive("/about") ? "text-secondary" : "text-primary"}
-      >
-        {
-          t({
-            en: "About",
-            fr: "À propos",
-          })
-        }
-      </a>
+      {
+        navLinks.map(({ path, label }) => (
+          <a
+            href={getRelativeLocaleUrl(locale, path)}
+            class={clsx(isActive(path) ? "text-secondary" : "text-primary")}
+          >
+            {t(label)}
+          </a>
+        ))
+      }
     </div>
     <div class="max-lg:hidden flex gap-x-2 items-center">
       <!-- <ThemeSwitcher client:load /> -->
@@ -216,61 +161,16 @@ const { lang } = Astro.params;
       </button>
     </div>
     <div class="space-y-4 py-6 flex flex-col">
-      <a
-        href={getRelativeLocaleUrl(locale, "/")}
-        class={isActive("/") ? "text-secondary" : "text-primary"}
-      >
-        {
-          t({
-            en: "Home",
-            fr: "Accueil",
-          })
-        }
-      </a>
-      <a
-        href={getRelativeLocaleUrl(locale, "/projects")}
-        class={isActive("/projects") ? "text-secondary" : "text-primary"}
-      >
-        {
-          t({
-            en: "Projects",
-            fr: "Projets",
-          })
-        }
-      </a>
-      <a
-        href={getRelativeLocaleUrl(locale, "/services")}
-        class={isActive("/services") ? "text-secondary" : "text-primary"}
-      >
-        {
-          t({
-            en: "Services",
-            fr: "Services",
-          })
-        }
-      </a>
-      <a
-        href={getRelativeLocaleUrl(locale, "/blogs")}
-        class={isActive("/blogs") ? "text-secondary" : "text-primary"}
-      >
-        {
-          t({
-            en: "Blogs",
-            fr: "Blogs",
-          })
-        }
-      </a>
-      <a
-        href={getRelativeLocaleUrl(locale, "/about")}
-        class={isActive("/about") ? "text-secondary" : "text-primary"}
-      >
-        {
-          t({
-            en: "About",
-            fr: "À propos",
-          })
-        }
-      </a>
+      {
+        navLinks.map(({ path, label }) => (
+          <a
+            href={getRelativeLocaleUrl(locale, path)}
+            class={clsx(isActive(path) ? "text-secondary" : "text-primary")}
+          >
+            {t(label)}
+          </a>
+        ))
+      }
       <a
         href={getRelativeLocaleUrl(locale, "/contact")}
         class={isActive("/contact") ? "text-secondary" : "text-primary"}

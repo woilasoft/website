@@ -3,10 +3,17 @@
 import { Image } from "astro:assets";
 import IconBlock from "@/components/ui/IconBlock.astro";
 import Icon from "@/components/ui/icons/Icon.astro";
+import type { Lang } from "@/i18n";
 
 interface Feature {
-  heading: string;
-  content: string;
+  heading: {
+    fr: string;
+    en: string;
+  };
+  content: {
+    fr: string;
+    en: string;
+  };
   svg: string;
 }
 
@@ -17,8 +24,17 @@ interface Props {
   src?: any;
   alt?: string;
 }
+
 // Define props from Astro
 const { title, subTitle, src, alt, features } = Astro.props;
+
+const locale = Astro.currentLocale!;
+
+const localizedFeatures = features?.map((feature) => ({
+  heading: feature.heading[locale as "en" | "fr"],
+  content: feature.content[locale as "en" | "fr"],
+  svg: feature.svg,
+}));
 ---
 
 <section class="w-full px-0 py-10 sm:px-6 lg:px-8 lg:py-10">
@@ -60,8 +76,8 @@ const { title, subTitle, src, alt, features } = Astro.props;
       <div class="grid gap-8 sm:grid-cols-2 md:gap-12">
         <!-- Injecting IconBlock components with different properties -->
         {
-          features &&
-            features.map((feature) => (
+          localizedFeatures &&
+            localizedFeatures.map((feature) => (
               <IconBlock heading={feature.heading} content={feature.content}>
                 <Icon name={feature.svg} classIcon="-mt-1" />
               </IconBlock>
