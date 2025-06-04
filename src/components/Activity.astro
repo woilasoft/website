@@ -21,6 +21,63 @@ const services = [
       "Profitez de nos solutions SaaS flexibles, conçues pour répondre aux besoins spécifiques de votre entreprise et garantir une scalabilité à long terme.",
   },
 ];
+const servicesTranslations = {
+  en: {
+    subtitle: "What we offer",
+    title: "Services crafted exclusively for your business",
+    services: [
+      {
+        title: "Desktop Applications",
+        description:
+          "We create custom, robust, and secure desktop software to improve your internal operations and help you work more efficiently.",
+      },
+      {
+        title: "Websites",
+        description:
+          "We develop fast, modern websites perfectly optimized for all devices.",
+      },
+      {
+        title: "Mobile Applications",
+        description:
+          "We build intuitive and high-performance mobile apps for both Android and iOS.",
+      },
+      {
+        title: "SaaS Solutions",
+        description:
+          "Flexible SaaS platforms tailored for your business needs with long-term scalability.",
+      },
+    ],
+  },
+  fr: {
+    subtitle: "Ce que nous proposons",
+    title: "Des services conçus uniquement pour votre entreprise",
+    services: [
+      {
+        title: "Applications de bureau",
+        description:
+          "Nous créons des logiciels bureautiques personnalisés, robustes et sécurisés pour améliorer vos opérations internes.",
+      },
+      {
+        title: "Sites web",
+        description:
+          "Nous développons des sites web rapides, modernes et optimisés pour tous les appareils.",
+      },
+      {
+        title: "Applications mobiles",
+        description:
+          "Nous créons des applications mobiles intuitives et performantes pour Android et iOS.",
+      },
+      {
+        title: "Solutions SaaS",
+        description:
+          "Des plateformes SaaS flexibles conçues pour répondre à vos besoins métier spécifiques.",
+      },
+    ],
+  },
+};
+const locale = Astro.currentLocale!;
+
+const localizedFeatures = servicesTranslations[locale as "en" | "fr"];
 ---
 
 <section
@@ -28,7 +85,8 @@ const services = [
 >
   <span
     class="text-gray-400 text-lg max-w-lg mx-auto mb-2 capitalize flex items-center"
-    >Qu'est ce que nous offrons <svg
+    >{localizedFeatures.subtitle}
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -45,13 +103,13 @@ const services = [
   <h1
     class="text-white text-4xl md:text-5xl xl:text-6xl font-semibold max-w-3xl mx-auto mb-16 leading-snug"
   >
-    Service créer uniquement pour votre business
+    {localizedFeatures.title}
   </h1>
   <div
     class="grid-offer text-left grid sm:grid-cols-2 md:grid-cols-2 gap-5 max-w-5xl mx-auto"
   >
     {
-      services.map((service, index) => (
+      localizedFeatures.services.map((service, index) => (
         <div class="card bg-gray-800 p-10 relative max-sm:p-5">
           <div class="circle" />
           <div class={`relative ${index % 2 === 0 ? "lg:pr-52" : "lg:pl-48"}`}>

@@ -17,6 +17,83 @@ export const getStaticPaths = () =>
   Object.keys(LOCALES).map((lang) => ({
     params: { lang },
   }));
+
+const tabsContent = {
+  en: {
+    sectionTitle: "Our Projects",
+    sectionDescription:
+      "Here are our latest creations showcasing client success.",
+    tabs: [
+      {
+        title: "Mobile App",
+        value: "mobile-app",
+        heading: "Mobile App",
+        description:
+          "We build high-performance mobile apps for Android and iOS.",
+        buttonLabel: "View Project",
+      },
+      {
+        title: "Website",
+        value: "website",
+        heading: "Website",
+        description: "Responsive and modern websites for all screen sizes.",
+        buttonLabel: "View Project",
+      },
+      {
+        title: "SaaS",
+        value: "saas",
+        heading: "SaaS",
+        description: "Cloud-native SaaS platforms tailored to your business.",
+        buttonLabel: "View Project",
+      },
+      {
+        title: "Other",
+        value: "autre",
+        heading: "Other",
+        description: "Custom software solutions for specific needs.",
+        buttonLabel: "View Project",
+      },
+    ],
+  },
+  fr: {
+    sectionTitle: "Nos projets",
+    sectionDescription:
+      "Voici nos dernières réalisations qui mettent en avant notre expertise.",
+    tabs: [
+      {
+        title: "Application Mobile",
+        value: "mobile-app",
+        heading: "Application Mobile",
+        description: "Applications mobiles performantes pour Android et iOS.",
+        buttonLabel: "Voir le projet",
+      },
+      {
+        title: "Site Web",
+        value: "website",
+        heading: "Site Web",
+        description:
+          "Sites web modernes et réactifs adaptés à tous les écrans.",
+        buttonLabel: "Voir le projet",
+      },
+      {
+        title: "SaaS",
+        value: "saas",
+        heading: "SaaS",
+        description: "Solutions SaaS cloud adaptées à vos besoins.",
+        buttonLabel: "Voir le projet",
+      },
+      {
+        title: "Autre",
+        value: "autre",
+        heading: "Autre",
+        description: "Solutions logicielles personnalisées.",
+        buttonLabel: "Voir le projet",
+      },
+    ],
+  },
+};
+const locale = Astro.currentLocale as Lang;
+const projectSectionInfo = tabsContent[locale as "en" | "fr"];
 ---
 
 <Layout>
@@ -36,7 +113,12 @@ export const getStaticPaths = () =>
   </div>
   <Activity />
   <div class="screen-wrapper mb-10">
-    <ShowCaseProject client:load />
+    <ShowCaseProject
+      sectionTitle={projectSectionInfo.sectionTitle}
+      sectionDescription={projectSectionInfo.sectionDescription}
+      tabs={projectSectionInfo.tabs}
+      client:load
+    />
   </div>
   <!-- <Teams /> -->
   <TeamSection client:load />
