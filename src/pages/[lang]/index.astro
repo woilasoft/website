@@ -10,6 +10,7 @@ import ClientsSection from "@/components/TestimonialCompany.astro";
 import Activity from "@/components/Activity.astro";
 import ShowCaseProject from "@/components/showcase-project";
 import features from "@/datas/features.json";
+import team from "@/datas/teams.json";
 import featureImage from "@/assets/images/section_img.png";
 import BlogSection from "@/components/blogSection.astro";
 import TeamSection from "@/components/team-section";
@@ -92,22 +93,41 @@ const tabsContent = {
     ],
   },
 };
-const locale = Astro.currentLocale as Lang;
-const projectSectionInfo = tabsContent[locale as "en" | "fr"];
+const locale = Astro.currentLocale as Lang as "en" | "fr";
+const projectSectionInfo = tabsContent[locale];
+const localizedTeam = team.map((member) => ({
+  ...member,
+  description: member.description[locale],
+}));
 ---
 
 <Layout>
   <HeroSection />
   <div class="screen-wrapper">
     <ClientsSection
-      title="Fiabilité aprouvée"
-      subTitle="Découvrez la fiabilité que des entreprises et startups innovantes nous font confiance pour leurs projets numériques."
+      title={t({
+        en: "Proven Reliability",
+        fr: "Fiabilité aprouvée",
+      })}
+      subTitle={t({
+        en: "Discover the trust innovative startups and companies place in us for their digital projects.",
+        fr: "Découvrez la fiabilité que des entreprises et startups innovantes nous font confiance pour leurs projets numériques.",
+      })}
     />
     <FeaturesGeneral
-      title="Solutions adaptées aux exigences numériques"
-      subTitle={`Chez <span class="font-bold text-secondary">Woilasoft</span>, nous relevons les défis uniques rencontrés dans le secteur technologique. Que ce soit pour des <b>logiciels</b> personnalisés, des <b>sites web</b> ou des solutions <b>SaaS</b>, nous sommes dédiés à atteindre vos objectifs.`}
+      title={t({
+        en: "Solutions tailored to digital challenges",
+        fr: "Solutions adaptées aux exigences numériques",
+      })}
+      subTitle={t({
+        en: `At <span class="font-bold text-secondary">Woilasoft</span>, we tackle the unique challenges faced in the tech industry. Whether it's <b>custom software</b>, <b>websites</b>, or <b>SaaS solutions</b>, we're committed to achieving your goals.`,
+        fr: `Chez <span class="font-bold text-secondary">Woilasoft</span>, nous relevons les défis uniques rencontrés dans le secteur technologique. Que ce soit pour des <b>logiciels</b> personnalisés, des <b>sites web</b> ou des solutions <b>SaaS</b>, nous sommes dédiés à atteindre vos objectifs.`,
+      })}
       src={featureImage}
-      alt="Produits Woilasoft dans des boîtes flottantes"
+      alt={t({
+        en: "Woilasoft products in floating boxes",
+        fr: "Produits Woilasoft dans des boîtes flottantes",
+      })}
       features={features}
     />
   </div>
@@ -121,7 +141,20 @@ const projectSectionInfo = tabsContent[locale as "en" | "fr"];
     />
   </div>
   <!-- <Teams /> -->
-  <TeamSection client:load />
+  <TeamSection
+    sectionContent={{
+      title: t({
+        en: "Our Team",
+        fr: "Notre équipe",
+      }),
+      subtitle: t({
+        en: "Meet the people building our success.",
+        fr: "Découvrez les personnes qui construisent notre succès.",
+      }),
+    }}
+    teamData={localizedTeam}
+    client:load
+  />
   <div class="screen-wrapper">
     <BlogSection />
   </div>
@@ -141,15 +174,33 @@ const projectSectionInfo = tabsContent[locale as "en" | "fr"];
       class="relative z-10 flex flex-col justify-center items-center h-full text-center px-4"
     >
       <h1 class="text-5xl font-bold leading-tight mb-4 max-sm:text-3xl">
-        Prêt à innover ?
+        {
+          t({
+            en: "Ready to innovate?",
+            fr: "Prêt à innover ?",
+          })
+        }
       </h1>
       <p class="text-lg text-gray-300 mb-8 max-sm:text-base">
-        Nous sommes prêts à vous aider à atteindre vos objectifs et à renforcer
-        votre identité numérique sans crainte.
+        {
+          t({
+            en: "We’re ready to help you achieve your goals and strengthen your digital presence with confidence.",
+            fr: "Nous sommes prêts à vous aider à atteindre vos objectifs et à renforcer votre identité numérique sans crainte.",
+          })
+        }
       </p>
-      <button class="shiny-cta">
-        <span>Contactez nous !</span>
-      </button>
+      <a href={getRelativeLocaleUrl(locale, "/contact")}>
+        <button class="shiny-cta">
+          <span
+            >{
+              t({
+                en: "Contact us!",
+                fr: "Contactez nous !",
+              })
+            }</span
+          >
+        </button>
+      </a>
     </div>
   </div>
 </Layout>

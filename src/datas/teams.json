@@ -1,0 +1,30 @@
+[
+  {
+    "name": "MOHAMED EL BACHIR",
+    "title": "Co-Founder & CEO",
+    "description": {
+      "en": "Visionary leader with a passion for innovative technology and impact-driven products.",
+      "fr": "Leader visionnaire passionné par les technologies innovantes et les produits à fort impact."
+    },
+    "image": "/bach.jpeg",
+    "social": {
+      "twitter": "#",
+      "instagram": "#",
+      "linkedin": "#"
+    }
+  },
+  {
+    "name": "MOUSSA HASSANA",
+    "title": "Co-Founder & CTO",
+    "description": {
+      "en": "Tech architect behind our infrastructure and product reliability.",
+      "fr": "Architecte technique garant de notre infrastructure et de la fiabilité du produit."
+    },
+    "image": "/moussa.jpg",
+    "social": {
+      "twitter": "#",
+      "instagram": "#",
+      "linkedin": "#"
+    }
+  }
+]
